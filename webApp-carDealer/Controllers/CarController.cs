@@ -15,7 +15,7 @@ namespace webApp_carDealer.Controllers
         public IActionResult ListCar()
         {
 
-            List<Car> listCars = new List<Car>();
+            List<Car> listCars = new List<Car>(); 
 
             using (CarContext db = new CarContext())
             {
