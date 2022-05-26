@@ -14,37 +14,37 @@ namespace webApp_cardDealer.Models
 
         [Required(ErrorMessage = "il campo marca è obbligatorio")]
         [StringLength(50)]
-        public string Marca { get; set; }
+        public string BrandCar { get; set; }
 
         [Required(ErrorMessage = "il campo descrizione è obbligatorio")]
         [Column(TypeName = "text")]
-        public string Descrizione { get; set; }
+        public string Description { get; set; }
 
         [Required(ErrorMessage = "il campo prezzo è obbligatorio")]
         [Range(0, int.MaxValue)]
-        public int Prezzo { get; set; }
+        public int Price { get; set; }
 
         [Required(ErrorMessage = "il campo modello è obbligatorio")]
         [StringLength(50)]
-        public string Modello { get; set; }
+        public string ModelCar { get; set; }
 
         [Required(ErrorMessage = "il campo Chilometri è obbligatorio")]
         [Range(0, int.MaxValue)]
-        public int Chilometri { get; set; }
+        public int Kilometers  { get; set; }
 
         public Car()
         {
 
         }
 
-        public Car(string Image, string Marca, string Descrizione, int Prezzo, string Modello, int Chilometri)
+        public Car(string image, string brandCar, string description, int price, string modelCar, int kilometers)
         {
-            this.Image = Image;
-            this.Marca = Marca;
-            this.Descrizione = Descrizione;
-            this.Prezzo = Prezzo;
-            this.Modello = Modello;
-            this.Chilometri = Chilometri;
+            this.Image = image;
+            this.BrandCar = brandCar;
+            this.Description = description;
+            this.Price = price;
+            this.ModelCar = modelCar;
+            this.Kilometers = kilometers;
 
         }
 
