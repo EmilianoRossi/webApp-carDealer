@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/webApp_carDealer.styles.css" asp-append-version="true" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Include Font Awesome Stylesheet in Header -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -18,59 +20,54 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="#">Utente</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Admin</a>
-                    </li>
-                    
-                  </ul>
-                      <form class="d-flex" role="search">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Utente</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("IndexAdmin" , "Car")">Admin</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Create" , "Car")">Inserisci auto</a>
+                        </li>
+
+                    </ul>
+                    <form class="d-flex" role="search">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
-                      </form>
+                    </form>
                 </div>
             </div>
         </nav>
     </header>
-    
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        
-        <div class="container p-4">
+    <footer style="background-color: rgba(0, 0, 0, 0.2);">
 
-            
-    
+        <!-- Copyright -->
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <p><strong>I nostri contatti</strong></p>
+                    <a href="https://www.facebook.com/bootsnipp"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
+                    <a href="https://twitter.com/bootsnipp"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
+                    <a href="https://plus.google.com/+Bootsnipp-page"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
+                    <a href="mailto:#"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
+                    <p>Â© 2020 Copyright: <a class="text-white" href="https://mdbootstrap.com/">CarDealerWebApp.com</a></p>
+                </div> 
+            </div>
         </div>
-  
 
-             <!-- Copyright -->
-             <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-                <section id="lab_social_icon_footer" class="d-inline-block">
-                <!-- Include Font Awesome Stylesheet in Header -->
-                <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-                <div class="container">
-                    <div class="align-content-start">
-                        <a href="https://www.facebook.com/bootsnipp"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
-	                    <a href="https://twitter.com/bootsnipp"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
-	                    <a href="https://plus.google.com/+Bootsnipp-page"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
-	                    <a href="mailto:#"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
-                    </div>
-                </div>
-            </section>
-                 
-                 <p style="text-align:right;">© 2020 Copyright: <a class="text-white" href="https://mdbootstrap.com/">PizzaWebApp.com</a></p>
-                
-             </div>
 
     </footer>
+
+    
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

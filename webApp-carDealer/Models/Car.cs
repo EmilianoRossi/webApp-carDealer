@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace webApp_cardDealer.Models
+namespace webApp_carDealer.Models
 {
     public class Car
     {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using webApp_cardDealer.Models;
+using webApp_carDealer.Models;
+
 
 namespace webApp_carDealer.Data
 {
