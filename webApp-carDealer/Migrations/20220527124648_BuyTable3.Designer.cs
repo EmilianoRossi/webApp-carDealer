@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webApp_carDealer.Data;
 
@@ -11,9 +12,10 @@ using webApp_carDealer.Data;
 namespace webApp_carDealer.Migrations
 {
     [DbContext(typeof(CarContext))]
-    partial class CarContextModelSnapshot : ModelSnapshot
+    [Migration("20220527124648_BuyTable3")]
+    partial class BuyTable3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,6 +33,7 @@ namespace webApp_carDealer.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("BrandCarBuy")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -44,7 +47,7 @@ namespace webApp_carDealer.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("Buys", (string)null);
+                    b.ToTable("Buys");
                 });
 
             modelBuilder.Entity("webApp_carDealer.Models.Car", b =>
@@ -92,7 +95,7 @@ namespace webApp_carDealer.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Cars", (string)null);
+                    b.ToTable("Cars");
                 });
 
             modelBuilder.Entity("webApp_carDealer.Models.Category", b =>
@@ -110,7 +113,7 @@ namespace webApp_carDealer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("webApp_carDealer.Models.Buy", b =>

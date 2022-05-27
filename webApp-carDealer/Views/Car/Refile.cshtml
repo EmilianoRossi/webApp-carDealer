@@ -1,0 +1,40 @@
+﻿@model Car
+
+<body class="bg-white" style="position:relative; height: 100%; background-size:cover; box-shadow:inset 0 -1px 5px;">
+    <main>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class = "row mt-3 justify-content-center">
+                    <div class ="col-4 justify-content-center mb-5">
+                        
+                    </div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <h1>Inserisci una nuova macchina</h1>
+                    
+                </div>
+                <div class="d-flex align-items-center">
+                              
+                    <h2>Compila il Form</h2>
+                </div>
+                <form action="@Url.Action("Refile", "Car")" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="col-3 mb-3">
+                        <h5>Quantità:</h5>
+                        <input asp-for="@Model.Quantity" class="d-block w-100 text-black" />
+                        <span asp-validation-for="@Model.Quantity" class="text-danger"></span>
+                    </div>
+            
+                    <div class="text-start">
+                        <input type="submit" class="btn btn-small btn-primary" value="Salva">
+                    </div>
+                
+
+                </form>
+            </div>
+        </div>
+    </div>
+    </main>
+</body>

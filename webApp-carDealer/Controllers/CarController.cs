@@ -30,7 +30,7 @@ namespace webApp_carDealer.Controllers
             using (CarContext db = new CarContext())
             {
 
-                List<Category> categories = db.Categories.ToList<Category>();   
+                List<Category> categories = db.Categories.ToList();
                 CarsCategories model = new CarsCategories();
                 model.car = new Car();
                 model.categories = categories;
@@ -61,21 +61,22 @@ namespace webApp_carDealer.Controllers
             using (CarContext db = new CarContext())
             {
 
-                Car CarToCreate = new Car();
-                CarToCreate.BrandCar = data.car.BrandCar;
-                CarToCreate.ModelCar = data.car.ModelCar;
-                CarToCreate.Kilometers = data.car.Kilometers;
-                CarToCreate.Quantity = data.car.Quantity;
-                CarToCreate.Description = data.car.Description;
-                CarToCreate.Image = data.car.Image;
-                CarToCreate.Price = data.car.Price;
-                CarToCreate.CategoryId = data.car.CategoryId;
-                db.Add(CarToCreate);
+                Car carToCreate = new Car();
+                carToCreate.Image = data.car.Image;
+                carToCreate.Description = data.car.Description;
+                carToCreate.BrandCar = data.car.BrandCar;
+                carToCreate.Price = data.car.Price;
+                carToCreate.Kilometers = data.car.Kilometers;
+                carToCreate.ModelCar = data.car.ModelCar;
+                carToCreate.Like = data.car.Like;
+                carToCreate.Quantity = data.car.Quantity;
+                carToCreate.CategoryId = data.car.CategoryId;
+                db.Cars.Add(carToCreate);
                 db.SaveChanges();
 
             }
 
-            return RedirectToAction("IndexAdmin", "Car");
+            return RedirectToAction("IndexAdmin");
 
         }
 
@@ -163,6 +164,96 @@ namespace webApp_carDealer.Controllers
             }
 
         }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+
+            using (CarContext db = new CarContext())
+            {
+
+                Car carToDelete = db.Cars
+                    .Where(car => car.Id == id)
+                    .FirstOrDefault();
+
+                if (carToDelete != null)
+                {
+
+                    db.Cars.Remove(carToDelete);
+                    db.SaveChanges();
+
+                    return RedirectToAction("IndexAdmin");
+
+                }
+                else
+                {
+
+                    return NotFound();
+
+                }
+
+            }
+
+
+        }
+        [HttpGet]
+        public IActionResult Refile(int id)
+        {
+            Car CarToUpdate = null;
+
+            using (CarContext db = new CarContext())
+            {
+
+                CarToUpdate = db.Cars
+                   .Where(car => car.Id == id)
+                   .First();
+            }
+            if (CarToUpdate == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return View("Refile", CarToUpdate);
+            }
+
+        }
+        [HttpPost]
+        public IActionResult Refile(int id, Car model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Refile", model);
+            }
+            else
+            {
+                
+                using (CarContext db = new CarContext())
+                {
+                    Car carToUpdate = db.Cars
+                   .Where(car => car.Id == id)
+                   .First();
+                    carToUpdate = db.Cars
+                       .Where(Car => Car.Id == id)
+                       .First();
+
+                    if (carToUpdate != null)
+                    {
+                        
+                        carToUpdate.Quantity = model.Quantity;
+
+                        db.SaveChanges();
+
+                        return RedirectToAction("IndexAdmin");
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                }
+            }
+        }
+
     }
 }
    

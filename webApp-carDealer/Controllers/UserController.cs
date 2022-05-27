@@ -18,15 +18,9 @@ namespace webApp_carDealer.Controllers
             return View("Index");
         }
 
-        public IActionResult Privacy()
+        public IActionResult DetailsUser()
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View("DetailsUser");
         }
     }
 }

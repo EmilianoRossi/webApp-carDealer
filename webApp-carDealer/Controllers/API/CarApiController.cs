@@ -31,6 +31,32 @@ namespace webApp_carDealer.Controllers.API
 
             return Ok(cars);
         }
-        
+        [HttpGet("{id}")]
+        public IActionResult DetailsUser(int id)
+        {
+            using (CarContext db = new CarContext())
+            {
+                try
+                {
+
+                    Car carFound = db.Cars
+                         .Where(cars => cars.Id == id)
+                         .First();
+
+                    return Ok(carFound);
+
+                }
+                catch (InvalidOperationException ex)
+                {
+                    return NotFound("l'auto con " + id + " non è stato trovato");
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+            }
+        }
     }
+    
+
 }

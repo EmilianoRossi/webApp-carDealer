@@ -7,9 +7,9 @@ namespace webApp_carDealer.Data
     public class CarContext : DbContext
     {
 
-        public DbSet<Car> Cars { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Buy> Buys { get; set; }
+        public DbSet<Car>? Cars { get; set; }
+        public DbSet<Category>? Categories { get; set; }
+        public DbSet<Buy>? Buys { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -36,13 +36,13 @@ namespace webApp_carDealer.Models
         public int? CategoryId { get; set; }
         public Category? Categoria { get; set; }
 
-        public List<Buy> Buys { get; set; }
+        public List<Buy>? Buys { get; set; }
         public Car()
         {
 
         }
 
-        public Car(string image, string brandCar, string description, int price, string modelCar, int kilometers , int quantity)
+        public Car(string image, string brandCar, string description, int price, string modelCar, int kilometers, int quantity, bool like)
         {
             this.Image = image;
             this.BrandCar = brandCar;
@@ -51,6 +51,7 @@ namespace webApp_carDealer.Models
             this.ModelCar = modelCar;
             this.Kilometers = kilometers;
             this.Quantity = quantity;
+            this.Like = like;
 
         }
 
