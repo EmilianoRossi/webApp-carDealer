@@ -94,7 +94,6 @@ namespace webApp_carDealer.Controllers
                 return View("Update", CarToUpdate);
             }
 
-
         }
         [HttpPost]
         public IActionResult Update(int id, Car model)
@@ -105,22 +104,22 @@ namespace webApp_carDealer.Controllers
             }
             else
             {
-                Car cartoupdate = null;
+                Car carToUpdate = null;
                 using (CarContext db = new CarContext())
                 {
 
-                    cartoupdate = db.Cars
+                    carToUpdate = db.Cars
                        .Where(Car => Car.Id == id)
                        .First();
 
-                    if (cartoupdate != null)
+                    if (carToUpdate != null)
                     {
-                        cartoupdate.Image = model.Image;
-                        cartoupdate.BrandCar = model.BrandCar;
-                        cartoupdate.Description = model.Description;
-                        cartoupdate.Price = model.Price;
-                        cartoupdate.ModelCar = model.ModelCar;
-                        cartoupdate.Kilometers = model.Kilometers;
+                        carToUpdate.Image = model.Image;
+                        carToUpdate.BrandCar = model.BrandCar;
+                        carToUpdate.Description = model.Description;
+                        carToUpdate.Price = model.Price;
+                        carToUpdate.ModelCar = model.ModelCar;
+                        carToUpdate.Kilometers = model.Kilometers;
 
                         db.SaveChanges();
 
@@ -132,6 +131,28 @@ namespace webApp_carDealer.Controllers
                     }
                 }
             }
+        }
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            Car carFound = null;
+
+            using (CarContext db = new CarContext())
+            {
+
+                carFound = db.Cars
+                   .Where(Car => Car.Id == id)
+                   .First();
+            }
+            if (carFound != null)
+            {
+                return View("Details", carFound);
+            }
+            else
+            {
+                return NotFound("la macchina con id" + id + " non è stato trovato");
+            }
+
         }
     }
 }

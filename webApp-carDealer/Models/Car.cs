@@ -48,6 +48,5 @@ namespace webApp_carDealer.Models
 
         }
 
-
     }
 }

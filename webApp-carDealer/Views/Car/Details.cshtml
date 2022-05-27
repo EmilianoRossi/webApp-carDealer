@@ -1,0 +1,37 @@
+﻿@model Car
+<body>
+
+    <main>
+        <div class="container ">
+
+            <div class="row justify-content-center ">
+                <div class="col-8 border-3 border border-dark p-0">
+
+                    <img class="card-img" src="@Model.Image" alt="Card image">
+
+                </div>
+
+            </div>
+          
+            <div class="row justify-content-center">
+                <div class="col-8 border-3 border border-dark p-0">
+
+                    <h1 class="card-title">Modello: @Model.BrandCar @Model.ModelCar</h1>          
+                    <h3 class="card-text">Prezzo: @Model.Price €</h3>
+                    <h3 class="card-text">Descrizione: @Model.Description</h3>
+                    <h3 class="card-text">Chilometri: @Model.Kilometers</h3>
+
+                </div>
+
+            </div> 
+
+        </div>
+            
+            
+            
+         
+        
+
+    </main>
+
+</body>
