@@ -27,49 +27,55 @@ namespace webApp_carDealer.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View("Form");
-        }
+            using (CarContext db = new CarContext())
+            {
 
+                List<Category> categories = db.Categories.ToList<Category>();   
+                CarsCategories model = new CarsCategories();
+                model.car = new Car();
+                model.categories = categories;
+                return View("Form", model);
+
+            }
+
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Car NewCar)
+        public IActionResult Create(CarsCategories data)
         {
+
             if (!ModelState.IsValid)
             {
-                return View("Form", NewCar);
+                using (CarContext db = new CarContext())
+                {
+
+                    List<Category> categories = db.Categories.ToList();
+                    data.categories = categories;
+
+                }
+                return View("Form", data);
+
             }
+
             using (CarContext db = new CarContext())
             {
-                Car AddCar = new Car(NewCar.Image, NewCar.BrandCar, NewCar.Description, NewCar.Price, NewCar.ModelCar, NewCar.Kilometers);
-                db.Add(AddCar);
+
+                Car CarToCreate = new Car();
+                CarToCreate.BrandCar = data.car.BrandCar;
+                CarToCreate.ModelCar = data.car.ModelCar;
+                CarToCreate.Kilometers = data.car.Kilometers;
+                CarToCreate.Quantity = data.car.Quantity;
+                CarToCreate.Description = data.car.Description;
+                CarToCreate.Image = data.car.Image;
+                CarToCreate.Price = data.car.Price;
+                CarToCreate.CategoryId = data.car.CategoryId;
+                db.Add(CarToCreate);
                 db.SaveChanges();
+
             }
-            return RedirectToAction("IndexAdmin");
-        }
 
-        [HttpPost]
-        public IActionResult Delete(int id)
-        {
-
-            using (CarContext db = new CarContext())
-            {
-                Car? carToDelete = db.Cars
-                     .Where(car => car.Id == id)
-                     .FirstOrDefault();
-
-                if (carToDelete != null)
-                {
-                    db.Cars.Remove(carToDelete);
-                    db.SaveChanges();
-
-                    return RedirectToAction("IndexAdmin", "Car");
-                }
-                else
-                {
-                    return NotFound();
-                }
-            }
+            return RedirectToAction("IndexAdmin", "Car");
 
         }
 
@@ -120,6 +126,7 @@ namespace webApp_carDealer.Controllers
                         carToUpdate.Price = model.Price;
                         carToUpdate.ModelCar = model.ModelCar;
                         carToUpdate.Kilometers = model.Kilometers;
+                        carToUpdate.Quantity = model.Quantity;
 
                         db.SaveChanges();
 
@@ -132,30 +139,9 @@ namespace webApp_carDealer.Controllers
                 }
             }
         }
+        
         [HttpGet]
-        public IActionResult Details(int id)
-        {
-            Car carFound = null;
-
-            using (CarContext db = new CarContext())
-            {
-
-                carFound = db.Cars
-                   .Where(Car => Car.Id == id)
-                   .First();
-            }
-            if (carFound != null)
-            {
-                return View("Details", carFound);
-            }
-            else
-            {
-                return NotFound("la macchina con id" + id + " non è stato trovato");
-            }
-
-        }
-
-        [HttpGet]
+        
         public IActionResult Details(int id)
         {
             Car carFound = null;

@@ -31,13 +31,17 @@ namespace webApp_carDealer.Models
         [Required(ErrorMessage = "il campo Chilometri è obbligatorio")]
         [Range(0, int.MaxValue)]
         public int Kilometers  { get; set; }
+        public bool? Like { get; set; }
+        public int Quantity { get; set; }
+        public int? CategoryId { get; set; }
+        public Category? Categoria { get; set; }
 
         public Car()
         {
 
         }
 
-        public Car(string image, string brandCar, string description, int price, string modelCar, int kilometers)
+        public Car(string image, string brandCar, string description, int price, string modelCar, int kilometers , int quantity)
         {
             this.Image = image;
             this.BrandCar = brandCar;
@@ -45,6 +49,7 @@ namespace webApp_carDealer.Models
             this.Price = price;
             this.ModelCar = modelCar;
             this.Kilometers = kilometers;
+            this.Quantity = quantity;
 
         }
 

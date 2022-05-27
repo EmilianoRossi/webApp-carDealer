@@ -1,4 +1,4 @@
-﻿@model Car
+﻿@model CarsCategories
 
 <body class="bg-white" style="position:relative; height: 100%; no-repeat ; background-size:cover; box-shadow:inset 0 -1px 5px;">
     <main>
@@ -23,34 +23,45 @@
                     @Html.AntiForgeryToken()
                     <div class="col-3 mb-3">
                         <h5>Immagine:</h5>
-                        <input asp-for="Image" class="d-block w-100 text-black" />
-                        <span asp-validation-for="Image" class="text-danger"></span>
+                        <input asp-for="car.Image" class="d-block w-100 text-black" />
+                        <span asp-validation-for="car.Image" class="text-danger"></span>
                     </div>
                     <div class="col-3 mb-5">
                         <h5>Marca:</h5>
-                        <input asp-for="BrandCar" class="d-block w-100" />
-                        <span asp-validation-for="BrandCar" class="text-danger"></span>
+                        <input asp-for="car.BrandCar" class="d-block w-100" />
+                        <span asp-validation-for="car.BrandCar" class="text-danger"></span>
                     </div>
                     <div class="col-3 mb-3">
                         <h5>Modello:</h5>
-                        <input asp-for="ModelCar" class="d-block w-100" />
-                        <span asp-validation-for="ModelCar" class="text-danger"></span>
+                        <input asp-for="car.ModelCar" class="d-block w-100" />
+                        <span asp-validation-for="car.ModelCar" class="text-danger"></span>
                     </div>
                     <div class="col-3 mb-3">
                         <h5>Descrizione:</h5>
-                        <textarea asp-for="Description" rows="10" class="d-block w-100"></textarea>
-                        <span asp-validation-for="Description" class="text-danger"></span>
+                        <textarea asp-for="car.Description" rows="10" class="d-block w-100"></textarea>
+                        <span asp-validation-for="car.Description" class="text-danger"></span>
                     </div>
                     <div class="col-3 mb-3">
                         <h5>Prezzo:</h5>
-                        <textarea asp-for="Price" rows="10" class="d-block w-100"></textarea>
-                        <span asp-validation-for="Price" class="text-danger"></span>
+                        <textarea asp-for="car.Price" rows="10" class="d-block w-100"></textarea>
+                        <span asp-validation-for="car.Price" class="text-danger"></span>
                     </div>
                     <div class="col-3 mb-3">
                         <h5>Chilometri:</h5>
-                        <textarea asp-for="Kilometers" rows="10" class="d-block w-100"></textarea>
-                        <span asp-validation-for="Kilometers" class="text-danger"></span>
+                        <textarea asp-for="car.Kilometers" rows="10" class="d-block w-100"></textarea>
+                        <span asp-validation-for="car.Kilometers" class="text-danger"></span>
                     </div>
+                    <strong>Categoria:</strong>
+                    <select asp-for ="car.CategoryId" class="form-select" aria-label="Default select example" >
+                        <option selected>Seleziona una categoria</option>
+                    @foreach(Category categoria in Model.categories)
+                    {
+                            
+                        <option value="@categoria.Id">@categoria.NameCategory</option>
+
+                    }
+                    </select>
+
                     <div class="text-start">
                         <input type="submit" class="btn btn-small btn-primary" value="Salva">
                     </div>
