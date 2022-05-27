@@ -154,6 +154,29 @@ namespace webApp_carDealer.Controllers
             }
 
         }
+
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            Car carFound = null;
+
+            using (CarContext db = new CarContext())
+            {
+
+                carFound = db.Cars
+                   .Where(Car => Car.Id == id)
+                   .First();
+            }
+            if (carFound != null)
+            {
+                return View("Details", carFound);
+            }
+            else
+            {
+                return NotFound("la macchina con id" + id + " non è stato trovato");
+            }
+
+        }
     }
 }
    
