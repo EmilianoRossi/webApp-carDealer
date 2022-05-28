@@ -18,6 +18,7 @@ namespace webApp_carDealer.Controllers
             {
 
                 listCar = db.Cars.ToList<Car>();
+                
 
             }
             return View("IndexAdmin", listCar);
@@ -164,95 +165,58 @@ namespace webApp_carDealer.Controllers
             }
 
         }
-
-        [HttpPost]
-        public IActionResult Delete(int id)
-        {
-
-            using (CarContext db = new CarContext())
-            {
-
-                Car carToDelete = db.Cars
-                    .Where(car => car.Id == id)
-                    .FirstOrDefault();
-
-                if (carToDelete != null)
-                {
-
-                    db.Cars.Remove(carToDelete);
-                    db.SaveChanges();
-
-                    return RedirectToAction("IndexAdmin");
-
-                }
-                else
-                {
-
-                    return NotFound();
-
-                }
-
-            }
-
-
-        }
         [HttpGet]
-        public IActionResult Refile(int id)
+        public IActionResult Refile()
         {
-            Car CarToUpdate = null;
-
             using (CarContext db = new CarContext())
             {
 
-                CarToUpdate = db.Cars
-                   .Where(car => car.Id == id)
-                   .First();
-            }
-            if (CarToUpdate == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return View("Refile", CarToUpdate);
+                List<Car> car = db.Cars.ToList();
+                CarsRefiles model = new CarsRefiles();
+                model.refile = new Refile();
+                model.listCar = car;
+                return View("Refile", model);
+
             }
 
         }
         [HttpPost]
-        public IActionResult Refile(int id, Car model)
+        [ValidateAntiForgeryToken]
+        public IActionResult Refile(CarsRefiles data)
         {
+
             if (!ModelState.IsValid)
             {
-                return View("Refile", model);
-            }
-            else
-            {
-                
                 using (CarContext db = new CarContext())
                 {
-                    Car carToUpdate = db.Cars
-                   .Where(car => car.Id == id)
-                   .First();
-                    carToUpdate = db.Cars
-                       .Where(Car => Car.Id == id)
-                       .First();
 
-                    if (carToUpdate != null)
-                    {
-                        
-                        carToUpdate.Quantity = model.Quantity;
+                    List<Car> car = db.Cars.ToList();
+                    data.listCar = car;
 
-                        db.SaveChanges();
-
-                        return RedirectToAction("IndexAdmin");
-                    }
-                    else
-                    {
-                        return NotFound();
-                    }
                 }
+                return View("Refile", data);
+
             }
+
+            using (CarContext db = new CarContext())
+            {
+
+                Refile RefileToCreate = new Refile();
+                RefileToCreate.NameSupplier = data.refile.NameSupplier;
+                RefileToCreate.Quantity=data.refile.Quantity;
+               
+                RefileToCreate.PriceRefile = data.refile.PriceRefile;
+
+                RefileToCreate.CarId = data.refile.CarId;
+                db.Refiles.Add(RefileToCreate);
+                db.SaveChanges();
+
+            }
+
+            return RedirectToAction("IndexAdmin");
+
         }
+
 
     }
 }

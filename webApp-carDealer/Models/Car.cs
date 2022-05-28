@@ -37,6 +37,7 @@ namespace webApp_carDealer.Models
         public Category? Categoria { get; set; }
 
         public List<Buy>? Buys { get; set; }
+        public List<Refile>? Refiles { get; set; }
         public Car()
         {
 

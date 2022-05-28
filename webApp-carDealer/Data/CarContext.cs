@@ -10,6 +10,7 @@ namespace webApp_carDealer.Data
         public DbSet<Car>? Cars { get; set; }
         public DbSet<Category>? Categories { get; set; }
         public DbSet<Buy>? Buys { get; set; }
+        public DbSet<Refile>? Refiles { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
