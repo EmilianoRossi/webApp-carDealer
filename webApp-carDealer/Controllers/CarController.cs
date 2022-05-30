@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using webApp_carDealer.Models;
 using webApp_carDealer.Data;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace webApp_carDealer.Controllers
 {
     public class CarController : Controller
     {
-
+        
 
         [HttpGet]
         public IActionResult IndexAdmin()
@@ -18,7 +20,7 @@ namespace webApp_carDealer.Controllers
             {
 
                 listCar = db.Cars.ToList<Car>();
-                
+
 
             }
             return View("IndexAdmin", listCar);
@@ -141,9 +143,9 @@ namespace webApp_carDealer.Controllers
                 }
             }
         }
-        
+
         [HttpGet]
-        
+
         public IActionResult Details(int id)
         {
             Car carFound = null;
@@ -203,9 +205,9 @@ namespace webApp_carDealer.Controllers
 
                 Refile RefileToCreate = new Refile();
                 RefileToCreate.NameSupplier = data.refile.NameSupplier;
-                RefileToCreate.Quantity=data.refile.Quantity;
-               
-                RefileToCreate.PriceRefile = data.refile.PriceRefile;
+                RefileToCreate.Quantity = data.refile.Quantity;
+                RefileToCreate.dateTime = DateTime.Now;
+
 
                 RefileToCreate.CarId = data.refile.CarId;
                 db.Refiles.Add(RefileToCreate);
@@ -216,8 +218,27 @@ namespace webApp_carDealer.Controllers
             return RedirectToAction("IndexAdmin");
 
         }
+        [HttpGet]
+        public IActionResult ListRefile()
+        {
+
+           using(CarContext db = new CarContext())
+            {
+
+                //List<Car> car = db.Cars.ToList<Car>();
+                List<Refile> refile = db.Refiles.ToList<Refile>();
+                //.Where(refile=> refile.CarId )
+                return View("ListRefile", refile);
+
+            }
+        }
+            
+        }
+        
+        
+
 
 
     }
-}
+
    

@@ -1,0 +1,31 @@
+﻿@model List<Refile> 
+ 
+
+<table class="table post-list-table">
+    <thead>
+        <tr>
+            <th>ID auto</th>
+            
+            <th>Quantità</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @{
+
+            
+
+        }
+            @foreach(Refile refiles in Model){
+                <tr>
+                <td class="id">@refiles.CarId</td>
+                
+                <td class="quantity">@refiles.Quantity</td>
+                </tr>
+            }
+            
+            
+              
+            
+        </tbody>
+</table>

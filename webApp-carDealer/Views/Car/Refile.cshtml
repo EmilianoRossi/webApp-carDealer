@@ -32,7 +32,8 @@
                         <span asp-validation-for="refile.Quantity" class="text-danger"></span>
                     </div>
                     <select asp-for ="refile.CarId" class="form-select" aria-label="Default select example" >
-                    <option selected>Seleziona una categoria</option>
+                    
+                    <option selected>Seleziona una macchina da rifornire</option>
                     @foreach(Car car in Model.listCar)
                     {
                             
