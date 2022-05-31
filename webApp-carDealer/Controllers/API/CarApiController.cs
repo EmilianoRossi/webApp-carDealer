@@ -60,20 +60,23 @@ namespace webApp_carDealer.Controllers.API
         [HttpGet]
         public IActionResult RankingCar()
         {
-
+            List <CarRanking> carRankings = new List<CarRanking>();
+            
             using (CarContext db = new CarContext())
             {
                 //Auto piu vendute
                 var queryClassifica = (from buy in db.Buys
-                                          group buy by buy.CarId
-                                          
+                                       
+                                       group buy by buy.CarId
+                                       
                                           into tableGroup
+                                       
+                                       select new { tableGroup.Key, Count = tableGroup.Count() }).ToList();
                                           
-                                          select new { tableGroup.Key, Count = tableGroup.Count() }).ToList();
 
                 List<Car> cars = db.Cars.ToList<Car>();
 
-                List<CarRanking> carRankings = new List<CarRanking>();
+                
                 foreach (Car car in cars)
                 {
 
@@ -85,9 +88,7 @@ namespace webApp_carDealer.Controllers.API
 
                     {
                         carRanking.CarSell = queryClassifica[indexCar].Count;
-
-                        
-
+                       
                     }
                     else
                     {
@@ -99,14 +100,13 @@ namespace webApp_carDealer.Controllers.API
                     carRanking.CarModel = car.ModelCar;
                     carRanking.ImageCar = car.Image;
 
-
+                    
                     carRankings.Add(carRanking);
-
+                    
                 }
 
-                return Ok(carRankings);
-
             }
+            return Ok(carRankings.OrderByDescending(x=>x.CarSell));
         }
 
     }

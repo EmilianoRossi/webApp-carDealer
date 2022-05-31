@@ -1,80 +1,113 @@
-﻿<body style="position:relative; height: 100%; background: white  no-repeat ; background-size:cover; box-shadow:inset 0 -1px 5px rgba(0,0,0,0.6);">
-    
-    <div class="container">
-            <div class="row align-items-center">
-       
-                <div class="col-12">
+﻿
+<body style="background-image: url(''); background-repeat: no-repeat; position: relative; width: 85%; height: 610px;  margin-left: auto; margin-right: auto;">
+
+    <main>
+
+        <div class="container">
+    <div class="row">
+        <div class="col-4">
+            
+        </div>
+        <div class="text-center col-12">
+            
+                <h1 class=" mt-3 mb-3">Classifica auto in base alle vendite</h1>
+                <br />
                 
-                        <h1>Classifica auto</h1>
-
-                    </div>
-                </div>
-            <div>
-
-            </div>
-    
-        <div class="row">
-
-            <div id="car-wait" class="row js_wait_car text-center">
-                
-            </div>
-            <div id="no-car-div" class="row js_no_car text-center d-none">
-                <div class="col-12">
-                    <h3>Non è presente alcuna auto</h3>
-                </div>
-            </div>
-            <div id="car-div" class="row js_car_cards">
-                <!-- qui verranno mostrati gli elementi -->
-            </div>
+                <br />
+        </div>
+        <div class="col-4">
+           
+            <img src="https://cdn.pixabay.com/photo/2020/05/24/20/48/gold-crown-5216142__480.png" style="width:200px" />
 
         </div>
+    </div>
+    <div id="car-wait" class="row js_wait_car text-center">
+        <div class="col-12">
+            <h3>Sto aspettando le macchine ...</h3>
+        </div>
+    </div>
+    <div id="no-car-div" class="row js_no_car text-center d-none">
+        <div class="col-12">
+            <h3>Non hai inserito alcuna auto</h3>
+        </div>
+    </div>
+    <div id="car-div" class="row js_car_cards d-none">
+        <!-- qui verranno mostrati gli elementi -->
+    </div>
+</div>
+
+    @section Scripts {
+
+        <script type="text/javascript">
+
+ranking();
+
+            function ranking(){
+                document.getElementById('car-div').innerHTML = '';
+
+                axios.get('/api/CarApi/RankingCar', {
+                    
+                }).then((result) => {
+                    // Codice che verrà eseguito quando arrivano i dati dalla mia web api
+                    console.log("Ho ricevuto le auto, evviva!");
+
+                    if(result.data.length == 0){
+                        document.getElementById('car-wait').classList.add('d-none');
+                        document.getElementById('no-car-div').classList.remove('d-none');
+                    } else {
+                        document.getElementById('no-car-div').classList.add('d-none');
+                        document.getElementById('car-wait').classList.add('d-none');
+                        document.getElementById('car-div').classList.remove('d-none');
+                        var count = 1;
+
+                        result.data.forEach(cars => {
+                            document.getElementById('car-div').innerHTML += 
+                                
+                           
+                                `
+                                <table class="table table-dark">
+                                      <thead>
+                                        <tr>
+                                          <th scope="col">Posizione</th> 
+                                          <th scope="col">Numero Vendite</th>
+                                          <th scope="col">Immagine</th>
+                                          <th scope="col">Brand</th>
+                                          <th scope="col">Model</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <th scope="row" class="text-warning">#${count++}</td>
+                                          <th scope="row">${cars.carSell}</th>
+                                          <td><img src="${cars.imageCar}" alt="foto" style="width:200px"></td>
+                                          <td>${cars.carBrand}</td>
+                                          <td>${cars.carModel} </td>
+                                        </tr>
+                                        
+                                      
+                                
+
+                                `
+                                console.log(cars);
+                        });
+                        
+                        
+                    }
+                    
+                }
+
+                ).catch((error) => {
+                    console.log("C'è stato un errore: " + error);
+                });
+            }
+    
+        </script>
+
     
 
-                
+    }
 
-    </div>
 
-@section Scripts {
+    </main>
 
-    <script type="text/javascript">
-
-        RankingCar();
-       
-        function RankingCar(){
-            
-            
-            axios.get('/api/CarApi/RankingCar/').then((result) => {
-                // Codice che verrà eseguito quando arrivano i dati dalla mia web api
-
-                    
-                        document.getElementById('car-div').innerHTML += 
-                            
-                            result.data.forEach(carRankings => {
-                            document.getElementById('car-div').innerHTML += 
-                                `
-                                <div class="row text-center mt-5 justify-content-center">
-                            
-                                <div class ="col-5 d-inline-block">
-                                <div class="card shadow mb-5 bg-body rounded">
-                                    <img src="${carRankings.imageCar}" class="card-img-top" alt="primaFoto">
-                                    <div class="card-body p-0 pb-0 bg-danger">
-                                        <h6 class="card-title text-uppercase bg-danger pb-2 pt-2 text-white ">${carRankings.carBrand} ${carRankings.carModel}</h6>
-                                        <h6 class="card-title text-uppercase bg-danger pb-2 pt-2 text-white ">${carRankings.carSell}</h6>
-                                    </div>
-                                
-                            </div>
-
-                                `
-                        });
-                            
-                
-            }).catch((error) => {
-                console.log("C'è stato un errore: " + error);
-            })
-        }
-        
-    </script>
-
-}
-  
 </body>
