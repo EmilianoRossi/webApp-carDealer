@@ -22,7 +22,7 @@ namespace webApp_carDealer.Models
 
         [Required(ErrorMessage = "il campo prezzo è obbligatorio")]
         [Range(0, int.MaxValue)]
-        public int Price { get; set; }
+        public double Price { get; set; }
 
         [Required(ErrorMessage = "il campo modello è obbligatorio")]
         [StringLength(50)]
