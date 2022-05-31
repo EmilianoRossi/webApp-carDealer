@@ -1,11 +1,12 @@
-﻿@model List<Refile> 
+﻿@model List<CarsAvailable>
  
 
 <table class="table post-list-table">
     <thead>
         <tr>
             <th>ID auto</th>
-            
+            <th>Brand</th>
+            <th>Model</th>
             <th>Quantità</th>
             
         </tr>
@@ -16,11 +17,12 @@
             
 
         }
-            @foreach(Refile refiles in Model){
+            @foreach(CarsAvailable carsAvailable in Model){
                 <tr>
-                <td class="id">@refiles.CarId</td>
-                
-                <td class="quantity">@refiles.Quantity</td>
+                <td class="id">@carsAvailable.CarId</td>
+                <td class="brand">@carsAvailable.BrandCar</td>
+                <td class="model">@carsAvailable.ModelCar</td>
+                <td class="quantity">@carsAvailable.QuantityAvailable</td>
                 </tr>
             }
             

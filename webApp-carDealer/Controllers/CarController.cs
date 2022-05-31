@@ -14,16 +14,51 @@ namespace webApp_carDealer.Controllers
         public IActionResult IndexAdmin()
         {
 
-            List<Car> listCar = new List<Car>();
-
             using (CarContext db = new CarContext())
             {
 
-                listCar = db.Cars.ToList<Car>();
+                var queryDisponibilità = (from refile in db.Refiles
+                                          group refile by refile.CarId
+                            into tableGroup
+                                          select new { tableGroup.Key, Sum = tableGroup.Sum(refile => refile.Quantity) }).ToList();
 
+                List<Car> cars = db.Cars.ToList<Car>();
+
+                List<CarsAvailable> carsAvailables = new List<CarsAvailable>();
+                foreach (Car car in cars)
+                {
+
+                    CarsAvailable carsAvailable = new CarsAvailable();
+                    carsAvailable.CarId = car.Id;
+                    int indexCar = queryDisponibilità.FindIndex(c => c.Key == car.Id);
+                    if (indexCar > -1)
+                    {
+                        carsAvailable.QuantityAvailable = queryDisponibilità[indexCar].Sum;
+
+                    }
+                    else
+                    {
+
+                        carsAvailable.QuantityAvailable = 0;
+
+                    }
+                    carsAvailable.ImageCar = car.Image;
+                    carsAvailable.BrandCar = car.BrandCar;
+                    carsAvailable.ModelCar = car.ModelCar;
+
+
+                    carsAvailables.Add(carsAvailable);
+
+
+
+
+                }
+
+                //List<Refile> refile = db.Refiles.ToList<Refile>();
+                //.Where(refile=> refile.CarId )
+                return View("IndexAdmin", carsAvailables);
 
             }
-            return View("IndexAdmin", listCar);
 
         }
 
@@ -144,7 +179,36 @@ namespace webApp_carDealer.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+
+            using (CarContext db = new CarContext())
+            {
+                Car? carToDelete = db.Cars
+                     .Where(car => car.Id == id)
+                     .FirstOrDefault();
+                Refile refileToDelete = db.Refiles
+                    .Where(refile => refile.CarId == id)
+                    .FirstOrDefault();
+
+                if (carToDelete != null)
+                {
+                    db.Cars.Remove(carToDelete);
+                    db.Refiles.Remove(refileToDelete);
+                    db.SaveChanges();
+
+                    return RedirectToAction("IndexAdmin");
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+        }
+
+
+                [HttpGet]
 
         public IActionResult Details(int id)
         {
@@ -225,10 +289,45 @@ namespace webApp_carDealer.Controllers
            using(CarContext db = new CarContext())
             {
 
-                //List<Car> car = db.Cars.ToList<Car>();
-                List<Refile> refile = db.Refiles.ToList<Refile>();
+                var queryDisponibilità = (from refile in db.Refiles
+                            group refile by refile.CarId
+                            into tableGroup
+                            select new { tableGroup.Key , Sum = tableGroup.Sum(refile => refile.Quantity) }).ToList();
+
+                List<Car> cars = db.Cars.ToList<Car>();
+
+                List<CarsAvailable> carsAvailables = new List<CarsAvailable>();
+                foreach(Car car in cars)
+                {
+
+                    CarsAvailable carsAvailable = new CarsAvailable();
+                    carsAvailable.CarId = car.Id;
+                    int indexCar = queryDisponibilità.FindIndex(c => c.Key == car.Id);
+                    if(indexCar > -1)
+                    {
+                        carsAvailable.QuantityAvailable = queryDisponibilità[indexCar].Sum;
+
+                    }
+                    else
+                    {
+
+                        carsAvailable.QuantityAvailable = 0;
+
+                    }
+                    carsAvailable.BrandCar = car.BrandCar;
+                    carsAvailable.ModelCar = car.ModelCar;
+                    
+
+                    carsAvailables.Add(carsAvailable);
+
+
+                    
+
+                }
+                
+                //List<Refile> refile = db.Refiles.ToList<Refile>();
                 //.Where(refile=> refile.CarId )
-                return View("ListRefile", refile);
+                return View("ListRefile" , carsAvailables);
 
             }
         }
