@@ -1,0 +1,80 @@
+﻿<body style="position:relative; height: 100%; background: white  no-repeat ; background-size:cover; box-shadow:inset 0 -1px 5px rgba(0,0,0,0.6);">
+    
+    <div class="container">
+            <div class="row align-items-center">
+       
+                <div class="col-12">
+                
+                        <h1>Classifica auto</h1>
+
+                    </div>
+                </div>
+            <div>
+
+            </div>
+    
+        <div class="row">
+
+            <div id="car-wait" class="row js_wait_car text-center">
+                
+            </div>
+            <div id="no-car-div" class="row js_no_car text-center d-none">
+                <div class="col-12">
+                    <h3>Non è presente alcuna auto</h3>
+                </div>
+            </div>
+            <div id="car-div" class="row js_car_cards">
+                <!-- qui verranno mostrati gli elementi -->
+            </div>
+
+        </div>
+    
+
+                
+
+    </div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        RankingCar();
+       
+        function RankingCar(){
+            
+            
+            axios.get('/api/CarApi/RankingCar/').then((result) => {
+                // Codice che verrà eseguito quando arrivano i dati dalla mia web api
+
+                    
+                        document.getElementById('car-div').innerHTML += 
+                            
+                            result.data.forEach(carRankings => {
+                            document.getElementById('car-div').innerHTML += 
+                                `
+                                <div class="row text-center mt-5 justify-content-center">
+                            
+                                <div class ="col-5 d-inline-block">
+                                <div class="card shadow mb-5 bg-body rounded">
+                                    <img src="${carRankings.imageCar}" class="card-img-top" alt="primaFoto">
+                                    <div class="card-body p-0 pb-0 bg-danger">
+                                        <h6 class="card-title text-uppercase bg-danger pb-2 pt-2 text-white ">${carRankings.carBrand} ${carRankings.carModel}</h6>
+                                        <h6 class="card-title text-uppercase bg-danger pb-2 pt-2 text-white ">${carRankings.carSell}</h6>
+                                    </div>
+                                
+                            </div>
+
+                                `
+                        });
+                            
+                
+            }).catch((error) => {
+                console.log("C'è stato un errore: " + error);
+            })
+        }
+        
+    </script>
+
+}
+  
+</body>

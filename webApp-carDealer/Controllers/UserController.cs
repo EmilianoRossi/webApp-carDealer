@@ -18,6 +18,10 @@ namespace webApp_carDealer.Controllers
         {
             return View("Index");
         }
+        public IActionResult RankingCar()
+        {
+            return View("RankingCar");
+        }
 
         public IActionResult DetailsUser()
         {

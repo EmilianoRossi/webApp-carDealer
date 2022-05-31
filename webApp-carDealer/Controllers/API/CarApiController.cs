@@ -56,7 +56,58 @@ namespace webApp_carDealer.Controllers.API
                 }
             }
         }
-    }
-    
 
+        [HttpGet]
+        public IActionResult RankingCar()
+        {
+
+            using (CarContext db = new CarContext())
+            {
+                //Auto piu vendute
+                var queryClassifica = (from buy in db.Buys
+                                          group buy by buy.CarId
+                                          
+                                          into tableGroup
+                                          
+                                          select new { tableGroup.Key, Count = tableGroup.Count() }).ToList();
+
+                List<Car> cars = db.Cars.ToList<Car>();
+
+                List<CarRanking> carRankings = new List<CarRanking>();
+                foreach (Car car in cars)
+                {
+
+                    CarRanking carRanking= new CarRanking();
+                    carRanking.CarId = car.Id;
+                    int indexCar = queryClassifica.FindIndex(c => c.Key == car.Id);
+                    
+                    if (indexCar > -1)
+
+                    {
+                        carRanking.CarSell = queryClassifica[indexCar].Count;
+
+                        
+
+                    }
+                    else
+                    {
+
+                        carRanking.CarSell = 0 ;
+
+                    }
+                    carRanking.CarBrand = car.BrandCar;
+                    carRanking.CarModel = car.ModelCar;
+                    carRanking.ImageCar = car.Image;
+
+
+                    carRankings.Add(carRanking);
+
+                }
+
+                return Ok(carRankings);
+
+            }
+        }
+
+    }
 }

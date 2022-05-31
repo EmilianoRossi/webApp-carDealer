@@ -8,7 +8,7 @@ namespace webApp_carDealer.Controllers
 {
     public class CarController : Controller
     {
-        
+
 
         [HttpGet]
         public IActionResult IndexAdmin()
@@ -188,14 +188,17 @@ namespace webApp_carDealer.Controllers
                 Car? carToDelete = db.Cars
                      .Where(car => car.Id == id)
                      .FirstOrDefault();
-                Refile refileToDelete = db.Refiles
+                Refile? refileToDelete = db.Refiles
                     .Where(refile => refile.CarId == id)
                     .FirstOrDefault();
-
-                if (carToDelete != null)
+                Buy? buyToDelete = db.Buys
+                    .Where(buy => buy.CarId == id)
+                    .FirstOrDefault();
+                if (carToDelete != null && refileToDelete!=null && buyToDelete!=null)
                 {
                     db.Cars.Remove(carToDelete);
                     db.Refiles.Remove(refileToDelete);
+                    db.Buys.Remove(buyToDelete);
                     db.SaveChanges();
 
                     return RedirectToAction("IndexAdmin");
@@ -286,13 +289,13 @@ namespace webApp_carDealer.Controllers
         public IActionResult ListRefile()
         {
 
-           using(CarContext db = new CarContext())
+            using (CarContext db = new CarContext())
             {
                 //Query totale disponibilità
                 var queryDisponibilità = (from refile in db.Refiles
-                            group refile by refile.CarId
+                                          group refile by refile.CarId
                             into tableGroup
-                            select new { tableGroup.Key , Sum = tableGroup.Sum(refile => refile.Quantity) }).ToList();
+                                          select new { tableGroup.Key, Sum = tableGroup.Sum(refile => refile.Quantity) }).ToList();
 
                 //Query acquisto
                 var queryBuy = (from buy in db.Buys
@@ -303,15 +306,15 @@ namespace webApp_carDealer.Controllers
                 List<Car> cars = db.Cars.ToList<Car>();
 
                 List<CarsAvailable> carsAvailables = new List<CarsAvailable>();
-                foreach(Car car in cars)
+                foreach (Car car in cars)
                 {
 
                     CarsAvailable carsAvailable = new CarsAvailable();
                     carsAvailable.CarId = car.Id;
                     int indexCar = queryDisponibilità.FindIndex(c => c.Key == car.Id);
-                    int indexBuy = queryBuy.FindIndex(x=> x.Key == car.Id);
-                    if(indexCar > -1 && indexBuy > -1)
-                    
+                    int indexBuy = queryBuy.FindIndex(x => x.Key == car.Id);
+                    if (indexCar > -1 && indexBuy > -1)
+
                     {
                         carsAvailable.QuantityAvailable = queryDisponibilità[indexCar].Sum;
 
@@ -326,23 +329,21 @@ namespace webApp_carDealer.Controllers
                     }
                     carsAvailable.BrandCar = car.BrandCar;
                     carsAvailable.ModelCar = car.ModelCar;
-                    
+
 
                     carsAvailables.Add(carsAvailable);
 
                 }
-                
-                return View("ListRefile" , carsAvailables);
+
+                return View("ListRefile", carsAvailables);
 
             }
         }
-            
-        }
-        
-        
-
-
 
     }
 
-   
+
+
+
+
+}

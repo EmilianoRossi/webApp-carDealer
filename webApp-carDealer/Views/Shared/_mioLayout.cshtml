@@ -23,7 +23,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Utente</a>
+                            <a class="nav-link active" aria-current="page" href="@Url.Action("Index" , "User")">Utente</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("IndexAdmin" , "Car")">Admin</a>
@@ -36,6 +36,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("UserBuy" , "User")">Acquista auto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("RankingCar" , "User")">Classifica auto</a>
                         </li>
 
                     </ul>
