@@ -21,39 +21,40 @@
                 </div>
                 <form action="@Url.Action("Create", "Car")" method="post">
                     @Html.AntiForgeryToken()
-                    <div class="col-3 mb-3">
+                    <div class="form-group col-md-6">
                         <h5>Immagine:</h5>
                         <input asp-for="car.Image" class="d-block w-100 text-black" />
                         <span asp-validation-for="car.Image" class="text-danger"></span>
                     </div>
-                    <div class="col-3 mb-5">
+
+                    <div class="form-group col-md-6">
                         <h5>Marca:</h5>
                         <input asp-for="car.BrandCar" class="d-block w-100" />
                         <span asp-validation-for="car.BrandCar" class="text-danger"></span>
                     </div>
-                    <div class="col-3 mb-3">
+                    <div class="form-group col-md-6">
                         <h5>Modello:</h5>
                         <input asp-for="car.ModelCar" class="d-block w-100" />
                         <span asp-validation-for="car.ModelCar" class="text-danger"></span>
                     </div>
-                    <div class="col-3 mb-3">
+                    <div class="form-group col-md-6">
                         <h5>Quantità:</h5>
                         <input asp-for="car.Quantity" class="d-block w-100" />
                         <span asp-validation-for="car.Quantity" class="text-danger"></span>
                     </div>
-                    <div class="col-3 mb-3">
+                    <div class="form-group">
                         <h5>Descrizione:</h5>
-                        <textarea asp-for="car.Description" rows="10" class="d-block w-100"></textarea>
+                        <textarea asp-for="car.Description" rows="5" class="form-control"></textarea>
                         <span asp-validation-for="car.Description" class="text-danger"></span>
                     </div>
-                    <div class="col-3 mb-3">
+                    <div class="form-group col-md-6">
                         <h5>Prezzo:</h5>
-                        <textarea asp-for="car.Price" rows="10" class="d-block w-100"></textarea>
+                        <input asp-for="car.Price" rows="10" class="d-block w-100"></input>
                         <span asp-validation-for="car.Price" class="text-danger"></span>
                     </div>
-                    <div class="col-3 mb-3">
+                    <div class="form-group col-md-6">
                         <h5>Chilometri:</h5>
-                        <textarea asp-for="car.Kilometers" rows="10" class="d-block w-100"></textarea>
+                        <input asp-for="car.Kilometers" rows="10" class="d-block w-100"></input>
                         <span asp-validation-for="car.Kilometers" class="text-danger"></span>
                     </div>
                     <strong>Categoria:</strong>
@@ -66,7 +67,7 @@
 
                     }
                     </select>
-
+                    <br />
                     <div class="text-start">
                         <input type="submit" class="btn btn-small btn-primary" value="Salva">
                     </div>
