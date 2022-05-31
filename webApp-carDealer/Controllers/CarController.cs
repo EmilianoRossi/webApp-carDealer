@@ -208,7 +208,7 @@ namespace webApp_carDealer.Controllers
         }
 
 
-                [HttpGet]
+        [HttpGet]
 
         public IActionResult Details(int id)
         {
@@ -288,11 +288,17 @@ namespace webApp_carDealer.Controllers
 
            using(CarContext db = new CarContext())
             {
-
+                //Query totale disponibilità
                 var queryDisponibilità = (from refile in db.Refiles
                             group refile by refile.CarId
                             into tableGroup
                             select new { tableGroup.Key , Sum = tableGroup.Sum(refile => refile.Quantity) }).ToList();
+
+                //Query acquisto
+                var queryBuy = (from buy in db.Buys
+                                group buy by buy.CarId
+                                into tableGroup2
+                                select new { tableGroup2.Key, Sum = tableGroup2.Sum(buy => buy.QuantityToBuy) }).ToList();
 
                 List<Car> cars = db.Cars.ToList<Car>();
 
@@ -303,15 +309,19 @@ namespace webApp_carDealer.Controllers
                     CarsAvailable carsAvailable = new CarsAvailable();
                     carsAvailable.CarId = car.Id;
                     int indexCar = queryDisponibilità.FindIndex(c => c.Key == car.Id);
-                    if(indexCar > -1)
+                    int indexBuy = queryBuy.FindIndex(x=> x.Key == car.Id);
+                    if(indexCar > -1 && indexBuy > -1)
+                    
                     {
                         carsAvailable.QuantityAvailable = queryDisponibilità[indexCar].Sum;
+
+                        carsAvailable.QuantityAvailable -= queryBuy[indexBuy].Sum;
 
                     }
                     else
                     {
 
-                        carsAvailable.QuantityAvailable = 0;
+                        carsAvailable.QuantityAvailable = queryDisponibilità[indexCar].Sum; ;
 
                     }
                     carsAvailable.BrandCar = car.BrandCar;
@@ -320,13 +330,8 @@ namespace webApp_carDealer.Controllers
 
                     carsAvailables.Add(carsAvailable);
 
-
-                    
-
                 }
                 
-                //List<Refile> refile = db.Refiles.ToList<Refile>();
-                //.Where(refile=> refile.CarId )
                 return View("ListRefile" , carsAvailables);
 
             }
