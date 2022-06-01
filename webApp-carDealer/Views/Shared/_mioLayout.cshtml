@@ -12,8 +12,8 @@
     <!-- Include Font Awesome Stylesheet in Header -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
-<body>
-    <header>
+<body class="bg-warning">
+    <header >
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Navbar</a>
@@ -34,16 +34,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("ListRefile" , "Car")">Lista rifornimenti</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("UserBuy" , "User")">Acquista auto</a>
-                        </li>
+                       
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("RankingCar" , "User")">Classifica auto</a>
                         </li>
 
                     </ul>
                     <form class="form-inline my-2 my-lg-0 ">
-      <input id="search_input" class="form-control mr-sm-2 me-lg-5" style="right" type="search" placeholder="Search" aria-label="Search">
+      <input id="search_input" class="form-control mr-sm-2 me-lg-5" style="right" type="search" placeholder="Ricerca per brand o modello" aria-label="Search">
       
     </form>
                 </div>

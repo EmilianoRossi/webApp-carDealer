@@ -21,25 +21,30 @@ namespace webApp_carDealer.Controllers
                                           group refile by refile.CarId
                             into tableGroup
                                           select new { tableGroup.Key, Sum = tableGroup.Sum(refile => refile.Quantity) }).ToList();
-
+                //Query acquisto
+                var queryBuy = (from buy in db.Buys
+                                group buy by buy.CarId
+                                into tableGroup2
+                                select new { tableGroup2.Key, Sum = tableGroup2.Sum(buy => buy.QuantityToBuy) }).ToList();
                 List<Car> cars = db.Cars.ToList<Car>();
 
                 List<CarsAvailable> carsAvailables = new List<CarsAvailable>();
-                foreach (Car car in cars)
+                foreach (Car car in cars )
                 {
 
                     CarsAvailable carsAvailable = new CarsAvailable();
                     carsAvailable.CarId = car.Id;
                     int indexCar = queryDisponibilità.FindIndex(c => c.Key == car.Id);
-                    if (indexCar > -1)
+                    int indexBuy = queryBuy.FindIndex(x => x.Key == car.Id);
+                    if (indexCar > -1 && indexBuy > -1)
                     {
                         carsAvailable.QuantityAvailable = queryDisponibilità[indexCar].Sum;
-
+                        carsAvailable.QuantityAvailable -= queryBuy[indexBuy].Sum;
                     }
                     else
                     {
 
-                        carsAvailable.QuantityAvailable = 0;
+                        carsAvailable.QuantityAvailable = queryDisponibilità[indexCar].Sum;
 
                     }
                     carsAvailable.ImageCar = car.Image;
@@ -235,56 +240,88 @@ namespace webApp_carDealer.Controllers
 
         }
         [HttpGet]
-        public IActionResult Refile()
+        public IActionResult Refile(int id)
         {
+            Car car = null;
+            Refile refile = null;
             using (CarContext db = new CarContext())
             {
+                car = db.Cars
+                   .Where(pacchetto => pacchetto.Id == id)
+                   .First();
 
-                List<Car> car = db.Cars.ToList();
-                CarsRefiles model = new CarsRefiles();
-                model.refile = new Refile();
-                model.listCar = car;
-                return View("Refile", model);
+                refile = db.Refiles
+                    .Where(refiles => refiles.CarId == car.Id)
+                    .First();
 
+                if(refile== null)
+                {
+
+                    return NotFound();
+
+                }
+                else
+                {
+
+                    return View("Refile", refile);
+                }
+              
             }
 
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Refile(CarsRefiles data)
+        public IActionResult Refile(int id, Refile data)
         {
 
             if (!ModelState.IsValid)
             {
-                using (CarContext db = new CarContext())
+                return View("Refile" , data);
+                /*using (CarContext db = new CarContext())
                 {
 
                     List<Car> car = db.Cars.ToList();
                     data.listCar = car;
 
                 }
-                return View("Refile", data);
+                return View("Refile", data);*/
 
             }
-
-            using (CarContext db = new CarContext())
+            else
             {
 
-                Refile RefileToCreate = new Refile();
-                RefileToCreate.NameSupplier = data.refile.NameSupplier;
-                RefileToCreate.Quantity = data.refile.Quantity;
-                RefileToCreate.dateTime = DateTime.Now;
+                Car car = null;
+                using (CarContext db = new CarContext())
+                {
+
+                    car = db.Cars
+                       .Where(Car => Car.Id == id)
+                       .First();
+                    if (car != null)
+                    {
+
+                        Refile RefileToCreate = new Refile();
+                        RefileToCreate.NameSupplier = data.NameSupplier;
+                        RefileToCreate.Quantity = data.Quantity;
+                        RefileToCreate.dateTime = DateTime.Now;
 
 
-                RefileToCreate.CarId = data.refile.CarId;
-                db.Refiles.Add(RefileToCreate);
-                db.SaveChanges();
+                        RefileToCreate.CarId = car.Id;
+                        db.Refiles.Add(RefileToCreate);
+                        db.SaveChanges();
+                        return RedirectToAction("IndexAdmin");
+                    }
+                    else
+                    {
 
+                        return NotFound();
+                    }
+
+                }
             }
-
-            return RedirectToAction("IndexAdmin");
-
         }
+        
         [HttpGet]
         public IActionResult ListRefile()
         {
@@ -324,7 +361,7 @@ namespace webApp_carDealer.Controllers
                     else
                     {
 
-                        carsAvailable.QuantityAvailable = queryDisponibilità[indexCar].Sum; ;
+                        carsAvailable.QuantityAvailable = queryDisponibilità[indexCar].Sum;
 
                     }
                     carsAvailable.BrandCar = car.BrandCar;
@@ -339,6 +376,8 @@ namespace webApp_carDealer.Controllers
 
             }
         }
+
+        
 
     }
 

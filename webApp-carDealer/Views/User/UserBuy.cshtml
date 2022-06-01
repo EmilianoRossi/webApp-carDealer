@@ -1,4 +1,4 @@
-﻿@model CarsBuy
+﻿@model Buy
 
 <body class="bg-white" style="position:relative; height: 100%; background-size:cover; box-shadow:inset 0 -1px 5px;">
     <main>
@@ -23,24 +23,15 @@
                     @Html.AntiForgeryToken()
                     <div class="col-3 mb-3">
                         <h5>Nome utente:</h5>
-                        <input asp-for="buy.NameUser" class="d-block w-100 text-black" />
-                        <span asp-validation-for="buy.NameUser" class="text-danger"></span>
+                        <input asp-for="NameUser" class="d-block w-100 text-black" />
+                        <span asp-validation-for="NameUser" class="text-danger"></span>
                     </div>
                     <div class="col-3 mb-5">
                         <h5>Quantità:</h5>
-                        <input asp-for="buy.QuantityToBuy" class="d-block w-100" />
-                        <span asp-validation-for="buy.QuantityToBuy" class="text-danger"></span>
+                        <input asp-for="QuantityToBuy" class="d-block w-100" />
+                        <span asp-validation-for="QuantityToBuy" class="text-danger"></span>
                     </div>
-                    <select asp-for ="buy.CarId" class="form-select" aria-label="Default select example" >
                     
-                    <option selected>Seleziona una macchina da acquistare</option>
-                    @foreach(Car car in Model.listCar)
-                    {
-                            
-                        <option value="@car.Id">@car.ModelCar</option>
-
-                    }
-                    </select>
                     
                     <div class="text-start">
                         <a href="@Url.Action("RecapBuy" , "User")">

@@ -32,18 +32,34 @@ namespace webApp_carDealer.Controllers
         {
             return View("RecapBuy");
         }
+        
 
         [HttpGet]
-        public IActionResult UserBuy()
+        public IActionResult UserBuy(int id)
         {
+            Car car = null;
+            Buy buy = null;
             using (CarContext db = new CarContext())
             {
+                car = db.Cars
+                   .Where(pacchetto => pacchetto.Id == id)
+                   .First();
 
-                List<Car> car = db.Cars.ToList();
-                CarsBuy model = new CarsBuy();
-                model.buy = new Buy();
-                model.listCar = car;
-                return View("UserBuy", model);
+                buy = db.Buys
+                    .Where(buy => buy.CarId == car.Id)
+                    .First();
+
+                if (buy == null)
+                {
+
+                    return NotFound();
+
+                }
+                else
+                {
+
+                    return View("UserBuy", buy);
+                }
 
             }
 
@@ -51,37 +67,80 @@ namespace webApp_carDealer.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult UserBuy(CarsBuy data)
+        public IActionResult UserBuy(int id, Buy data)
         {
 
             if (!ModelState.IsValid)
             {
+                return View("UserBuy", data);
+                
+
+            }
+            else
+            {
+
+                Car car = null;
                 using (CarContext db = new CarContext())
                 {
 
-                    List<Car> car = db.Cars.ToList();
-                    data.listCar = car;
+                    car = db.Cars
+                       .Where(Car => Car.Id == id)
+                       .First();
+                    if (car != null)
+                    {
+
+                        Buy BuyToCreate = new Buy();
+                        BuyToCreate.NameUser = data.NameUser;
+                        BuyToCreate.QuantityToBuy = data.QuantityToBuy;
+                        BuyToCreate.DateBuy = DateTime.Now;
+
+
+                        BuyToCreate.CarId = car.Id;
+                        db.Buys.Add(BuyToCreate);
+                        db.SaveChanges();
+                        return RedirectToAction("RecapBuy");
+                    }
+                    else
+                    {
+
+                        return NotFound();
+                    }
 
                 }
-                return View("UserBuy", data);
-
             }
-
-            using (CarContext db = new CarContext())
-            {
-
-                Buy BuyToCreate = new Buy();
-                BuyToCreate.QuantityToBuy = data.buy.QuantityToBuy;
-                BuyToCreate.NameUser = data.buy.NameUser;
-                BuyToCreate.DateBuy = DateTime.Now;
-                BuyToCreate.CarId = data.buy.CarId;
-                db.Buys.Add(BuyToCreate);
-                db.SaveChanges();
-
-            }
-
-            return RedirectToAction("RecapBuy");
-
         }
+        /*[HttpPost]
+        public IActionResult LikeCar(int id, Car model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Details", model);
+            }
+            else
+            {
+                Car car = null;
+                LikeCar likeToCreate = null;
+                using (CarContext db = new CarContext())
+                {
+
+                    car = db.Cars
+                       .Where(Car => Car.Id == id)
+                       .First();
+
+                    if (car != null)
+                    {
+                        likeToCreate.CarId = car.Id;
+                        db.Likes.Add(likeToCreate);
+
+                        db.SaveChanges();
+
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                }
+            }*/
     }
-}
+  }
