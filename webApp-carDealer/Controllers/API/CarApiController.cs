@@ -109,5 +109,31 @@ namespace webApp_carDealer.Controllers.API
             return Ok(carRankings.OrderByDescending(x=>x.CarSell));
         }
 
+        [HttpPost]
+        public IActionResult Post([FromBody] LikeCar model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return UnprocessableEntity(ModelState);
+            }
+            using (CarContext context = new CarContext())
+            {
+                
+                Car carFound = context.Cars
+                         .Where(cars => cars.Id == model.Id)
+                         .First();
+                
+               
+                carFound.Like++;
+
+                context.SaveChanges();
+
+
+
+                return Ok(carFound);
+            }
+        }
     }
+
+    
 }

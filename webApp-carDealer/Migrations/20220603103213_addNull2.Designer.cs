@@ -12,8 +12,8 @@ using webApp_carDealer.Data;
 namespace webApp_carDealer.Migrations
 {
     [DbContext(typeof(CarContext))]
-    [Migration("20220601091038_LikeTable")]
-    partial class LikeTable
+    [Migration("20220603103213_addNull2")]
+    partial class addNull2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -80,8 +80,8 @@ namespace webApp_carDealer.Migrations
                     b.Property<int>("Kilometers")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("Like")
-                        .HasColumnType("bit");
+                    b.Property<int?>("Like")
+                        .HasColumnType("int");
 
                     b.Property<string>("ModelCar")
                         .IsRequired()
@@ -117,24 +117,6 @@ namespace webApp_carDealer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("webApp_carDealer.Models.LikeCar", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("CarId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarId");
-
-                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("webApp_carDealer.Models.Refile", b =>
@@ -187,15 +169,6 @@ namespace webApp_carDealer.Migrations
                     b.Navigation("Categoria");
                 });
 
-            modelBuilder.Entity("webApp_carDealer.Models.LikeCar", b =>
-                {
-                    b.HasOne("webApp_carDealer.Models.Car", "Car")
-                        .WithMany("Likes")
-                        .HasForeignKey("CarId");
-
-                    b.Navigation("Car");
-                });
-
             modelBuilder.Entity("webApp_carDealer.Models.Refile", b =>
                 {
                     b.HasOne("webApp_carDealer.Models.Car", "Car")
@@ -208,8 +181,6 @@ namespace webApp_carDealer.Migrations
             modelBuilder.Entity("webApp_carDealer.Models.Car", b =>
                 {
                     b.Navigation("Buys");
-
-                    b.Navigation("Likes");
 
                     b.Navigation("Refiles");
                 });

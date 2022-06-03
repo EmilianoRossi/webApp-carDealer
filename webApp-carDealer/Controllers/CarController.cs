@@ -17,15 +17,7 @@ namespace webApp_carDealer.Controllers
             using (CarContext db = new CarContext())
             {
 
-                var queryDisponibilità = (from refile in db.Refiles
-                                          group refile by refile.CarId
-                            into tableGroup
-                                          select new { tableGroup.Key, Sum = tableGroup.Sum(refile => refile.Quantity) }).ToList();
-                //Query acquisto
-                var queryBuy = (from buy in db.Buys
-                                group buy by buy.CarId
-                                into tableGroup2
-                                select new { tableGroup2.Key, Sum = tableGroup2.Sum(buy => buy.QuantityToBuy) }).ToList();
+                
                 List<Car> cars = db.Cars.ToList<Car>();
 
                 List<CarsAvailable> carsAvailables = new List<CarsAvailable>();
@@ -34,19 +26,6 @@ namespace webApp_carDealer.Controllers
 
                     CarsAvailable carsAvailable = new CarsAvailable();
                     carsAvailable.CarId = car.Id;
-                    int indexCar = queryDisponibilità.FindIndex(c => c.Key == car.Id);
-                    int indexBuy = queryBuy.FindIndex(x => x.Key == car.Id);
-                    if (indexCar > -1 && indexBuy > -1)
-                    {
-                        carsAvailable.QuantityAvailable = queryDisponibilità[indexCar].Sum;
-                        carsAvailable.QuantityAvailable -= queryBuy[indexBuy].Sum;
-                    }
-                    else
-                    {
-
-                        carsAvailable.QuantityAvailable = queryDisponibilità[indexCar].Sum;
-
-                    }
                     carsAvailable.ImageCar = car.Image;
                     carsAvailable.BrandCar = car.BrandCar;
                     carsAvailable.ModelCar = car.ModelCar;
@@ -114,7 +93,11 @@ namespace webApp_carDealer.Controllers
                 carToCreate.Like = data.car.Like;
                 carToCreate.Quantity = data.car.Quantity;
                 carToCreate.CategoryId = data.car.CategoryId;
+                
+                
                 db.Cars.Add(carToCreate);
+                
+                
                 db.SaveChanges();
 
             }
@@ -199,11 +182,22 @@ namespace webApp_carDealer.Controllers
                 Buy? buyToDelete = db.Buys
                     .Where(buy => buy.CarId == id)
                     .FirstOrDefault();
-                if (carToDelete != null && refileToDelete!=null && buyToDelete!=null)
+                if (carToDelete != null)
                 {
+
+                    
+                    if (buyToDelete != null)
+                    {
+
+                        db.Cars.Remove(carToDelete);
+                        db.Refiles.Remove(refileToDelete);
+                        db.Buys.Remove(buyToDelete);
+                        db.SaveChanges();
+
+                    }
                     db.Cars.Remove(carToDelete);
-                    db.Refiles.Remove(refileToDelete);
-                    db.Buys.Remove(buyToDelete);
+                    
+                    
                     db.SaveChanges();
 
                     return RedirectToAction("IndexAdmin");
@@ -217,29 +211,6 @@ namespace webApp_carDealer.Controllers
 
 
         [HttpGet]
-
-        public IActionResult Details(int id)
-        {
-            Car carFound = null;
-
-            using (CarContext db = new CarContext())
-            {
-
-                carFound = db.Cars
-                   .Where(Car => Car.Id == id)
-                   .First();
-            }
-            if (carFound != null)
-            {
-                return View("Details", carFound);
-            }
-            else
-            {
-                return NotFound("la macchina con id" + id + " non è stato trovato");
-            }
-
-        }
-        [HttpGet]
         public IActionResult Refile(int id)
         {
             Car car = null;
@@ -249,12 +220,24 @@ namespace webApp_carDealer.Controllers
                 car = db.Cars
                    .Where(pacchetto => pacchetto.Id == id)
                    .First();
+                List<Refile> listRefile = db.Refiles.ToList<Refile>();
+                foreach (Refile refiles in listRefile)
+                {
 
+                    if (refiles.CarId == null)
+                    {
+
+                        refiles.CarId = id;
+                        db.SaveChanges();
+
+                    }
+
+                }
                 refile = db.Refiles
                     .Where(refiles => refiles.CarId == car.Id)
                     .First();
 
-                if(refile== null)
+                if (refile == null)
                 {
 
                     return NotFound();
@@ -265,10 +248,11 @@ namespace webApp_carDealer.Controllers
 
                     return View("Refile", refile);
                 }
-              
+
             }
 
         }
+        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -298,17 +282,21 @@ namespace webApp_carDealer.Controllers
                     car = db.Cars
                        .Where(Car => Car.Id == id)
                        .First();
+                   
                     if (car != null)
                     {
 
                         Refile RefileToCreate = new Refile();
+                        CarsAvailable carsAvailable = new CarsAvailable();
                         RefileToCreate.NameSupplier = data.NameSupplier;
                         RefileToCreate.Quantity = data.Quantity;
                         RefileToCreate.dateTime = DateTime.Now;
+                      
 
 
+                        
                         RefileToCreate.CarId = car.Id;
-                        db.Refiles.Add(RefileToCreate);
+                        
                         db.SaveChanges();
                         return RedirectToAction("IndexAdmin");
                     }

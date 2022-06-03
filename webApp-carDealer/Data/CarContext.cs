@@ -11,7 +11,7 @@ namespace webApp_carDealer.Data
         public DbSet<Category>? Categories { get; set; }
         public DbSet<Buy>? Buys { get; set; }
         public DbSet<Refile>? Refiles { get; set; }
-        public DbSet<LikeCar>? Likes { get; set; }
+      
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
