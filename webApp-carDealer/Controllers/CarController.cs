@@ -96,9 +96,11 @@ namespace webApp_carDealer.Controllers
 
 
                 db.Cars.Add(carToCreate);
+                db.SaveChanges();
 
                 Refile refileToCreate = new Refile();
                 refileToCreate.NameSupplier = data.car.BrandCar;
+                refileToCreate.CarId = carToCreate.Id;
                 db.Refiles.Add(refileToCreate);
                 db.SaveChanges();
 
@@ -175,6 +177,8 @@ namespace webApp_carDealer.Controllers
 
             using (CarContext db = new CarContext())
             {
+                List<Refile> listRefile = db.Refiles.ToList<Refile>();
+
                 Car? carToDelete = db.Cars
                      .Where(car => car.Id == id)
                      .FirstOrDefault();
@@ -184,30 +188,38 @@ namespace webApp_carDealer.Controllers
                 Buy? buyToDelete = db.Buys
                     .Where(buy => buy.CarId == id)
                     .FirstOrDefault();
-                if (carToDelete != null)
+                
+                foreach(Refile refiles in listRefile)
                 {
 
-                    
-                    if (buyToDelete != null)
+                    if (carToDelete != null)
                     {
 
+
+                        if (buyToDelete != null)
+                        {
+
+                            db.Cars.Remove(carToDelete);
+                            db.Refiles.Remove(refileToDelete);
+                            db.Buys.Remove(buyToDelete);
+                            db.SaveChanges();
+
+                        }
                         db.Cars.Remove(carToDelete);
+                        
                         db.Refiles.Remove(refileToDelete);
-                        db.Buys.Remove(buyToDelete);
                         db.SaveChanges();
 
+                        return RedirectToAction("IndexAdmin");
                     }
-                    db.Cars.Remove(carToDelete);
-                    
-                    
-                    db.SaveChanges();
+                    else
+                    {
+                        return NotFound();
+                    }
 
-                    return RedirectToAction("IndexAdmin");
                 }
-                else
-                {
-                    return NotFound();
-                }
+                return View("IndexAdmin");
+                
             }
         }
 
@@ -356,7 +368,7 @@ namespace webApp_carDealer.Controllers
                     else
                     {
 
-                        carsAvailable.QuantityAvailable = queryDisponibilità[indexCar].Sum;
+                        carsAvailable.QuantityAvailable +=queryDisponibilità[indexCar].Sum;
 
                     }
                     carsAvailable.BrandCar = car.BrandCar;
