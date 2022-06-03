@@ -368,7 +368,7 @@ namespace webApp_carDealer.Controllers
                     else
                     {
 
-                        carsAvailable.QuantityAvailable +=queryDisponibilità[indexCar].Sum;
+                        carsAvailable.QuantityAvailable += queryDisponibilità[indexCar].Sum;
 
                     }
                     carsAvailable.BrandCar = car.BrandCar;
