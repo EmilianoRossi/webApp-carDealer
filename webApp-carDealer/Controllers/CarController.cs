@@ -93,11 +93,13 @@ namespace webApp_carDealer.Controllers
                 carToCreate.Like = data.car.Like;
                 carToCreate.Quantity = data.car.Quantity;
                 carToCreate.CategoryId = data.car.CategoryId;
-                
-                
+
+
                 db.Cars.Add(carToCreate);
-                
-                
+
+                Refile refileToCreate = new Refile();
+                refileToCreate.NameSupplier = data.car.BrandCar;
+                db.Refiles.Add(refileToCreate);
                 db.SaveChanges();
 
             }
@@ -221,6 +223,7 @@ namespace webApp_carDealer.Controllers
                    .Where(pacchetto => pacchetto.Id == id)
                    .First();
                 List<Refile> listRefile = db.Refiles.ToList<Refile>();
+
                 foreach (Refile refiles in listRefile)
                 {
 
@@ -228,6 +231,7 @@ namespace webApp_carDealer.Controllers
                     {
 
                         refiles.CarId = id;
+                        
                         db.SaveChanges();
 
                     }
@@ -287,6 +291,7 @@ namespace webApp_carDealer.Controllers
                     {
 
                         Refile RefileToCreate = new Refile();
+                        
                         CarsAvailable carsAvailable = new CarsAvailable();
                         RefileToCreate.NameSupplier = data.NameSupplier;
                         RefileToCreate.Quantity = data.Quantity;
@@ -296,7 +301,9 @@ namespace webApp_carDealer.Controllers
 
                         
                         RefileToCreate.CarId = car.Id;
-                        
+
+
+                        db.Refiles.Add(RefileToCreate);
                         db.SaveChanges();
                         return RedirectToAction("IndexAdmin");
                     }
