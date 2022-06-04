@@ -66,18 +66,21 @@
                                         </div>
                                     <div class="card-footer p-0 pb-0 bg-danger">
                                         <a href="https://localhost:7202/User/DetailsUser/${cars.id}">Dettagli!</a>
-                                        <button onclick="like(${cars.id})" type="button" class="btn btn-danger">Mi piace</button>
+                                        <a href="https://localhost:7202/User/Index">
+                                            <button onclick="like(${cars.id})" type="button" class="btn btn-danger">Mi piace</button>
+                                        </a>
                                         <p>${cars.like} &hearts;</p>
 
                                     </div>
                                 </div>
 
                                 `
-                                
+                            console.log(cars.id);       
                         });
-                        console.log(result);
+                        
                     }
                     console.log(result.data);
+                    
                 }
 
                 ).catch((error) => {
@@ -85,10 +88,13 @@
                 });
             }
             
-            function like(carLike) {
-                console.log(carLike);
+
+            function like(carId) {
+                
                 axios.post('/api/CarApi/Post', {
-                    id : carLike
+                    Id : carId
+                    
+                    
                 }).then(result =>{
 
                     this.disabled=true;
@@ -96,14 +102,14 @@
                 }).catch(error => {
                         console.log("C'è stato un errore: " + error);
                     })
+                console.log(carId);
+                
+                
             }
     
         </script>
 
-    
-
     }
-
 
     </main>
 

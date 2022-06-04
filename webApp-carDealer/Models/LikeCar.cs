@@ -4,7 +4,7 @@
     {
 
         public int Id { get; set; }
-        public int LikeNumber { get; set; }
+        public int? LikeNumber { get; set; }
 
 
     }

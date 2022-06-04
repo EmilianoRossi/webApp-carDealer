@@ -121,17 +121,21 @@ namespace webApp_carDealer.Controllers.API
             {
                 
                 Car carFound = context.Cars
-                         .Where(cars => cars.Id == model.Id)
+                         .Where(carsFound => carsFound.Id == model.Id)
                          .First();
+
+
+                model.LikeNumber=1;
+                carFound.Like+=model.LikeNumber;
                 
-               
-                carFound.Like++;
+
+
 
                 context.SaveChanges();
 
 
 
-                return Ok(carFound);
+                return Ok(carFound.Like);
             }
         }
     }
