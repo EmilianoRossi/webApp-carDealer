@@ -12,8 +12,8 @@ using webApp_carDealer.Data;
 namespace webApp_carDealer.Migrations
 {
     [DbContext(typeof(CarContext))]
-    [Migration("20220603103213_addNull2")]
-    partial class addNull2
+    [Migration("20220604190746_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

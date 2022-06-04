@@ -109,38 +109,6 @@ namespace webApp_carDealer.Controllers
                 }
             }
         }
-        /*[HttpPost]
-        public IActionResult LikeCar(int id, Car model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("Details", model);
-            }
-            else
-            {
-                Car car = null;
-                LikeCar likeToCreate = null;
-                using (CarContext db = new CarContext())
-                {
-
-                    car = db.Cars
-                       .Where(Car => Car.Id == id)
-                       .First();
-
-                    if (car != null)
-                    {
-                        likeToCreate.CarId = car.Id;
-                        db.Likes.Add(likeToCreate);
-
-                        db.SaveChanges();
-
-                        return RedirectToAction("Index");
-                    }
-                    else
-                    {
-                        return NotFound();
-                    }
-                }
-            }*/
+        
     }
   }

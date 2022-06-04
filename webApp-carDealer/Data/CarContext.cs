@@ -11,11 +11,11 @@ namespace webApp_carDealer.Data
         public DbSet<Category>? Categories { get; set; }
         public DbSet<Buy>? Buys { get; set; }
         public DbSet<Refile>? Refiles { get; set; }
-      
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=localhost;Database=webApp-carDealer;Integrated Security=True");
+            optionsBuilder.UseSqlServer("Data Source=localhost;Database=webApp_car_Dealer;Integrated Security=True");
         }
 
 

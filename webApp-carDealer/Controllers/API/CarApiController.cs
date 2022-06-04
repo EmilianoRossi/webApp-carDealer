@@ -15,9 +15,10 @@ namespace webApp_carDealer.Controllers.API
         public IActionResult Get(string? search)
         {
             List<Car> cars = new List<Car>();
+
             using (CarContext db = new CarContext())
             {
-
+                
                 // LOGICA PER RICERCARE I POST CHE CONTENGONO NEL TIUOLO O NELLA DESCRIZIONE LA STRINGA DI RICERCA
                 if (search != null && search != "")
                 {
