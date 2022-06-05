@@ -12,7 +12,7 @@ using webApp_carDealer.Data;
 namespace webApp_carDealer.Migrations
 {
     [DbContext(typeof(CarContext))]
-    [Migration("20220604190746_InitialCreate")]
+    [Migration("20220605160358_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
