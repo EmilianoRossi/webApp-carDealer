@@ -32,11 +32,12 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link text-black" href="#services">Services</a></li>
-                        <li class="nav-item"><a class="nav-link text-black" href="#portfolio">Lista auto</a></li>
-                        <li class="nav-item"><a class="nav-link text-black" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link text-black" href="#services">Servizi</a></li>
+                        <li class="nav-item"><a class="nav-link text-black" href="#classifica">Classifica</a></li>
+                        <li class="nav-item"><a class="nav-link text-black" href="#portfolio">Auto</a></li>
+                        <li class="nav-item"><a class="nav-link text-black" href="#about">Percorso</a></li>
                         <li class="nav-item"><a class="nav-link text-black" href="#team">Team</a></li>
-                        <li class="nav-item"><a class="nav-link text-black" href="#contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link text-black" href="#contact">Contatti</a></li>
                         <input id="search_input" class="form-control mr-sm-2 me-lg-5" style="right" type="search" placeholder="Ricerca per brand o modello" aria-label="Search">
                     </ul>
                 </div>
@@ -47,9 +48,9 @@
         <header class="masthead">
             <div class="container">
                 
-                <div class="masthead-subheading">Welcome To Our Web Site!</div>
-                <div class="masthead-heading text-uppercase">Car Dealer</div>
-                <a class="btn btn-primary btn-xl text-uppercase" href="@Url.Action("RankingCar" , "User")">Classifica auto</a>
+                <div class="masthead-subheading">Benvenuti nel nostro sito!</div>
+                <div class="masthead-heading text-uppercase">Concessionario auto</div>
+                
                  <a class="btn btn-primary btn-xl text-uppercase" href="@Url.Action("IndexAdmin" , "Car")">Accedi all'area admin</a>
 
             </div>
@@ -90,10 +91,35 @@
                 </div>
             </div>
         </section>
+         <!-- Classifica-->
+         <section class="page-section bg-light" id="classifica">
+            <div class="container">
+                <h2 class="text-center section-heading text-uppercase">Classifica</h2>
+                    <h3 class="text-center section-subheading text-muted">Le nostre auto piu vendute!</h3>
+                <div id="div-car-ranking-top" class="text-center">
+                 <table  class="table table-white">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Numero Vendite</th>
+                    <th scope="col">Immagine</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Modello</th>
+                </tr>
+                </thead>
+                  <tbody id="car-div-ranking"> 
+    
+                  </tbody>
+                 </table>   
+                </div>
+                
+            </div>
+        </section>
         <!-- Portfolio Grid-->
+       
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
-                <h2 class="text-center section-heading text-uppercase">Car List</h2>
+                <h2 class="text-center section-heading text-uppercase">Parco Auto</h2>
                     <h3 class="text-center section-subheading text-muted">Le nostre auto!</h3>
                 <div id="div-car" class="text-center">
                     
@@ -105,7 +131,7 @@
         <section class="page-section" id="about">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">About</h2>
+                    <h2 class="section-heading text-uppercase">Percorso</h2>
                     <h3 class="section-subheading text-muted">Il nostro percorso!</h3>
                 </div>
                 <ul class="timeline">
@@ -166,8 +192,8 @@
         <section class="page-section bg-light" id="team">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading text-uppercase">Il nostro Team</h2>
+                    <h3 class="section-subheading text-muted">Composizione del team per il project work finale.</h3>
                 </div>
                 <div class="row">
                     <div class="col-lg-4">
@@ -259,8 +285,8 @@
         <section class="page-section" id="contact">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Contact Us</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading text-uppercase">Contattaci</h2>
+                    <h3 class="section-subheading text-muted">Contatta il nostro centro assistenza</h3>
                 </div>
                 <!-- * * * * * * * * * * * * * * *-->
                 <!-- * * SB Forms Contact Form * *-->
@@ -274,26 +300,26 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <!-- Name input-->
-                                <input class="form-control" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
-                                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                                <input class="form-control" id="name" type="text" placeholder="Nome *" data-sb-validations="required" />
+                                <div class="invalid-feedback" data-sb-feedback="name:required">Nome richiesto.</div>
                             </div>
                             <div class="form-group">
                                 <!-- Email address input-->
-                                <input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required,email" />
+                                <input class="form-control" id="email" type="email" placeholder="Email *" data-sb-validations="required,email" />
                                 <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                                <div class="invalid-feedback" data-sb-feedback="email:email">Email non valida.</div>
                             </div>
                             <div class="form-group mb-md-0">
                                 <!-- Phone number input-->
-                                <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" data-sb-validations="required" />
-                                <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                                <input class="form-control" id="phone" type="tel" placeholder="Numero di telefono *" data-sb-validations="required" />
+                                <div class="invalid-feedback" data-sb-feedback="phone:required">Numero di telefono richiesto.</div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group form-group-textarea mb-md-0">
                                 <!-- Message input-->
-                                <textarea class="form-control" id="message" placeholder="Your Message *" data-sb-validations="required"></textarea>
-                                <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                                <textarea class="form-control" id="message" placeholder="Messaggio *" data-sb-validations="required"></textarea>
+                                <div class="invalid-feedback" data-sb-feedback="message:required">Messaggio richiesto.</div>
                             </div>
                         </div>
                     </div>
@@ -315,7 +341,7 @@
                     <!-- an error submitting the form-->
                     <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
                     <!-- Submit Button-->
-                    <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Send Message</button></div>
+                    <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Invia!</button></div>
                 </form>
             </div>
         </section>
@@ -561,7 +587,56 @@
         @section Scripts {
             
         <script type="text/javascript">
+            ranking();
 
+            function ranking(){
+                document.getElementById('car-div-ranking').innerHTML = '';
+
+                axios.get('/api/CarApi/RankingCar', {
+                    
+                }).then((result) => {
+                    // Codice che verrà eseguito quando arrivano i dati dalla mia web api
+                    console.log("Ho ricevuto le auto, evviva!");
+
+                    
+                        var count = 1;
+
+                        result.data.forEach(cars => {
+                            document.getElementById('car-div-ranking').innerHTML += 
+                                
+                           
+                                `
+                                    
+                                    
+                                        
+                                         
+                                            <tr>
+                                                <td>${count++}</td>
+                                                <td>${cars.carSell}</td>
+                                                <td><img width="200px" src="${cars.imageCar}"></td>
+                                                <td>${cars.carBrand}</td>
+                                                <td>${cars.carModel}</td>
+                                                
+                                            </tr>
+                                           
+                                        
+                                         
+                                     
+                                
+
+                                `
+                                console.log(cars);
+                        });
+                        
+                        
+                  
+                    
+                }
+
+                ).catch((error) => {
+                    console.log("C'è stato un errore: " + error);
+                });
+            }
             document.getElementById("search_input").addEventListener('keyup', searchItems);
 
             searchItems();
@@ -591,7 +666,7 @@
                                     <div class="portfolio-item">
                                         <a class="portfolio-link" data-bs-toggle="modal" href="https://localhost:7202/User/DetailsUser/${cars.id}">
                                             <div class="portfolio-hover">
-                                            <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                            <div class="portfolio-hover-content"><p>Dettagli</p></i></div>
                                             </div>
                                             <img class="img-fluid" src="${cars.image}" alt="..." />
                                         </a>
@@ -600,7 +675,7 @@
                                 <div class="portfolio-caption-subheading text-muted"> 
                                     <a href="https://localhost:7202/#portfolio">
                                         <button onclick="like(${cars.id})" type="button" class="btn btn-danger">Mi piace</button>
-                                        <p>${cars.like} &hearts;</p>
+                                        <p class="text-danger">${cars.like} &hearts;</p>
                                     </a>
                                 </div>
                             </div>
