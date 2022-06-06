@@ -40,17 +40,27 @@
 <body>
 
     <main>
-        
-                            
-                <img class="img-fluid" src="@Model.Image" alt="..." />
-                
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">@Model.BrandCar @Model.ModelCar</h2>
-                    <h3 class="section-subheading text-muted">@Model.Description</h3>
-                    <h3 class="section-subheading text-muted">Chilometri: @Model.Kilometers</h3>
-                    <h3 class="text-success section-subheading text-muted">Prezzo: @Model.Price €</h3> 
-                    
+            <div class="row">
+                <div class="col-8">
+
+                    <img class="img-fluid" src="@Model.Image" alt="..." />
+
                 </div>
+                            
+                
+                <div class="col-3">
+
+                    
+                        <h2 class="section-heading text-uppercase">@Model.BrandCar @Model.ModelCar</h2>
+                        <p class="section-subheading text-muted">@Model.Description</p>
+                        <h4 class="section-subheading text-muted">Chilometri: @Model.Kilometers</h4>
+                        <h3 class="text-success section-subheading text-muted">Prezzo: @Model.Price €</h3> 
+                    
+                    
+
+                </div>
+            </div>
+                
          
             
 

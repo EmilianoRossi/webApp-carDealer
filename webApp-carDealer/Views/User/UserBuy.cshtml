@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-3 mb-5">
                         <h5>Quantità:</h5>
-                        <input asp-for="QuantityToBuy" class="d-block w-100" />
+                        <input asp-for="QuantityToBuy" max="1" min="0"; class="d-block w-100" />
                         <span asp-validation-for="QuantityToBuy" class="text-danger"></span>
                     </div>
                     

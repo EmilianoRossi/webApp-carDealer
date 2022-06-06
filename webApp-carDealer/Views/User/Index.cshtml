@@ -125,12 +125,13 @@
             <div class="container">
                 <h2 class="text-center section-heading text-uppercase">Parco auto</h2>
                     <h3 class="text-center section-subheading text-muted">Le nostre auto!</h3>
-                <div id="div-car" class="text-center">
+                
+                <div id="div-car" class="row text-center">
                     
                 </div>
                 
                 
-            </div>
+            </>
         </section>
         <!-- About-->
         <section class="page-section" id="about">
@@ -233,7 +234,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src=".\css/img/unnamed.jpg" alt="..." />
+                            <img class="mx-auto rounded-circle" src=".\css/img/mondello.png" alt="..." />
                             <h4>Simone Mondello</h4>
                             
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
@@ -391,23 +392,25 @@
                         result.data.forEach(cars => {
                             document.getElementById('div-car').innerHTML += 
                                 `
-                               
-                                    <div class="portfolio-item">
-                                        <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
-                                        <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><p>${cars.price}€</></i></div>
-                                    </div>
-                                        <img class="img-fluid" src="${cars.image}" alt="..." />
-                                        </a>
-                                        <div class="portfolio-caption">
-                                            <div class="portfolio-caption-heading">${cars.brandCar} ${cars.modelCar}</div>
-                                            <a href="https://localhost:7202/User/DetailsUser/${cars.id}">
-                                            <button type="button" class="btn btn-primary">Dettagli</button>
-                                            </a>
-                                            <button onclick="like(${cars.id})" type="button" class="btn btn-danger">Mi piace</button>
-                                             <p class="text-danger">${cars.like} &hearts;</p>
+                                <div class="col-4">
+                                    <div class="portfolio-item inline">
+                                    
+                                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
+                                            <div class="portfolio-hover">
+                                        <div class="portfolio-hover-content"><p>${cars.price}€</></i></div>
                                         </div>
+                                            <img class="img-fluid" src="${cars.image}" height="250" alt="..." />
+                                            </a>
+                                            <div class="portfolio-caption">
+                                                <div class="portfolio-caption-heading">${cars.brandCar} ${cars.modelCar}</div>
+                                                <a href="https://localhost:7202/User/DetailsUser/${cars.id}">
+                                                <button type="button" class="btn btn-primary">Dettagli</button>
+                                                </a>
+                                                <button onclick="like(${cars.id})" type="button" class="btn btn-danger">Mi piace</button>
+                                                    <input type="text" class="text-center" id="likeText" value="${cars.like} &hearts;" style="border:none;">
+                                            </div>
                                     </div>
+                                 </div>
                                 
                             
 
@@ -434,7 +437,6 @@
                     
                 }).then(result =>{
 
-                    this.disabled=true;
                     console.log("ciao");
                 }).catch(error => {
                         console.log("C'è stato un errore: " + error);

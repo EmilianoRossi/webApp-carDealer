@@ -89,22 +89,28 @@
                     
                         document.getElementById('car-div').innerHTML += 
                             `
-                            <img class="img-fluid" src="${result.data.image}" alt="..." />
-                
-                            <div class="text-center">
-                                <h2 class="section-heading text-uppercase">${result.data.brandCar} ${result.data.modelCar}</h2>
-                                <h3 class="section-subheading text-muted">${result.data.description}</h3>
-                                <h3 class="section-subheading text-muted">Chilometri: ${result.data.kilometers} </h3>
-                                <h3 class="text-success section-subheading text-muted">Prezzo: ${result.data.price} €</h3> 
-                               
-                                <a href="https://localhost:7202/User/UserBuy/${result.data.id}">
-                                
-                                <button type="button" class="btn btn-success">ACQUISTA</button>
-                                </a>
-                                
-                            </div>
+                             <div class="row">
+                                <div class="col-8">
 
+                                    <img class="img-fluid" src="${result.data.image}" alt="..." />
+
+                                </div>
+                            
+                
+                                <div class="col-3">
+
+                    
+                                    <h2 class="section-heading text-uppercase">${result.data.brandCar} ${result.data.modelCar}</h2>
+                                    <p class="section-subheading text-muted">${result.data.description}</p>
+                                    <h4 class="section-subheading text-muted">Chilometri: ${result.data.kilometers}</h4>
+                                    <h3 class="text-success section-subheading text-muted">Prezzo: ${result.data.price} €</h3> 
+                    
+                                    <a href="https://localhost:7202/User/UserBuy/${result.data.id}">
+                                        <button type="button" class="btn btn-success">ACQUISTA</button>
+                                    </a>
+                                </div>
                             </div>
+                            
 
                             `
                             

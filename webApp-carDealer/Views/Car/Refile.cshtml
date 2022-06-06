@@ -44,50 +44,50 @@
     <div class="container">
         
                 
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Riforniment auto</h2>
-                    <h3 class="section-subheading text-muted">Effettua il rifornimento dell'auto selezionata'</h3>
-                </div>
-                </div>
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Riforniment auto</h2>
+            <h3 class="section-subheading text-muted">Effettua il rifornimento dell'auto selezionata'</h3>
+        </div>
+        </div>
                 
-                <form action="@Url.Action("Refile", "Car")" method="post">
-                    @Html.AntiForgeryToken()
-                    <div class="form-group col-md-6">
-                        <h5>Nome fornitore:</h5>
-                        <input asp-for="NameSupplier" class="d-block w-100 text-black" />
-                        <span asp-validation-for="NameSupplier" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <h5>Quantità:</h5>
-                        <input asp-for="Quantity" class="d-block w-100" />
-                        <span asp-validation-for="Quantity" class="text-danger"></span>
-                    </div> 
-                    <div class="text-start">
-                        <input type="submit" class="btn btn-small btn-primary" value="Salva">
-                    </div>
+        <form action="@Url.Action("Refile", "Car")" method="post">
+            @Html.AntiForgeryToken()
+            <div class="form-group col-md-6">
+                <h5>Nome fornitore:</h5>
+                <input asp-for="NameSupplier" class="d-block w-100 text-black" />
+                <span asp-validation-for="NameSupplier" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <h5>Quantità:</h5>
+                <input asp-for="Quantity" min="0" class="d-block w-100" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div> 
+            <div class="text-start">
+                <input type="submit" class="btn btn-small btn-primary" value="Salva">
+            </div>
                 
 
-                </form>
+        </form>
           
     </main>
 </body>
 
-                                            <footer class="footer py-4">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-4 text-lg-start">Copyright &copy; WebApp-CarDealer 2022</div>
-                    <div class="col-lg-4 my-3 my-lg-0">
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                    <div class="col-lg-4 text-lg-end">
-                        <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
-                        <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+            <footer class="footer py-4">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-4 text-lg-start">Copyright &copy; WebApp-CarDealer 2022</div>
+                        <div class="col-lg-4 my-3 my-lg-0">
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                        <div class="col-lg-4 text-lg-end">
+                            <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
+                            <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
 
          <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
