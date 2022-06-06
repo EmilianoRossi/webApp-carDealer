@@ -125,8 +125,8 @@ namespace webApp_carDealer.Controllers.API
                          .First();
 
 
-                model.LikeNumber=1;
-                carFound.Like+=model.LikeNumber;
+                model.LikeNumber=0;
+                carFound.Like++;
                 
 
 

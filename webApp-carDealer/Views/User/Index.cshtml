@@ -32,13 +32,14 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link text-black" href="#services">Servizi</a></li>
-                        <li class="nav-item"><a class="nav-link text-black" href="#classifica">Classifica</a></li>
-                        <li class="nav-item"><a class="nav-link text-black" href="#portfolio">Auto</a></li>
-                        <li class="nav-item"><a class="nav-link text-black" href="@Url.Action("Create","Car" )">Aggiungi Auto</a></li>
-                        <li class="nav-item"><a class="nav-link text-black" href="#about">Percorso</a></li>
-                        <li class="nav-item"><a class="nav-link text-black" href="#team">Team</a></li>
-                       <!-- <li class="nav-item"><a class="nav-link text-black" href="#contact">Contatti</a></li>-->
+                        <li class="nav-item"><a class="nav-link  text-warning" href="#services">Servizi</a></li>
+                        <li class="nav-item"><a class="nav-link  text-warning" href="#classifica">Classifica</a></li>
+                        <li class="nav-item"><a class="nav-link  text-warning" href="#portfolio">Auto</a></li>
+                        
+                        <li class="nav-item"><a class="nav-link  text-warning" href="#about">Percorso</a></li>
+                        <li class="nav-item"><a class="nav-link  text-warning" href="#team">Team</a></li>
+                        <li class="nav-item"><a class="nav-link  text-warning" href="#contact">Contatti</a></li>
+                      
                         <input id="search_input" class="form-control mr-sm-2 me-lg-5" style="right" type="search" placeholder="Ricerca per brand o modello" aria-label="Search">
                     </ul>
                 </div>
@@ -51,8 +52,6 @@
                 
                 <div class="masthead-subheading">Benvenuti nel nostro sito!</div>
                 <div class="masthead-heading text-uppercase">Concessionario auto</div>
-                
-                 <a class="btn btn-primary btn-xl text-uppercase" href="@Url.Action("IndexAdmin" , "Car")">Accedi all'area admin</a>
 
             </div>
 
@@ -74,18 +73,22 @@
                         <p class="text-muted">Vuoi acquistare l'auto dei tuoi sogni? scegli tra le nostre disponibilità l'auto che desideri!</p>
                     </div>
                     <div class="col-md-4">
+                        <a href="@Url.Action("IndexAdmin" , "Car")">
                         <span class="fa-stack fa-4x">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
                             <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
                         </span>
+                        </a>
                         <h4 class="my-3">Gestione amministrativa</h4>
                         <p class="text-muted">Inserisci , modifica , elimina e vedi i dettagli del parco auto!</p>
                     </div>
                     <div class="col-md-4">
+                        
                         <span class="fa-stack fa-4x">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
                             <i class="fas fa-business-time fa-stack-1x fa-inverse"></i>
                         </span>
+                        
                         <h4 class="my-3">Rifornisci</h4>
                         <p class="text-muted">Effettua a portata di click il rifornimento per l'auto selezionata!</p>
                     </div>
@@ -120,7 +123,7 @@
        
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
-                <h2 class="text-center section-heading text-uppercase">Parco Auto</h2>
+                <h2 class="text-center section-heading text-uppercase">Parco auto</h2>
                     <h3 class="text-center section-subheading text-muted">Le nostre auto!</h3>
                 <div id="div-car" class="text-center">
                     
@@ -202,7 +205,7 @@
                         <div class="team-member">
                             <img class="mx-auto rounded-circle" src=".\css/img/unnamed.jpg" alt="..." />
                             <h4>Emiliano Rossi</h4>
-                            <p class="text-muted">Lead Designer</p>
+                            
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
@@ -212,7 +215,7 @@
                         <div class="team-member">
                             <img class="mx-auto rounded-circle" src=".\css/img/simo.jpg" alt="..." />
                             <h4>Simone Serpi</h4>
-                            <p class="text-muted">Lead Designer</p>
+                            
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
@@ -220,9 +223,9 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src=".\css/img/unnamed.jpg" alt="..." />
+                            <img class="mx-auto rounded-circle" src=".\css/img/giuseppe.jfif" alt="..." />
                             <h4>Giuseppe Russo</h4>
-                            <p class="text-muted">Lead Designer</p>
+                            
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
@@ -232,7 +235,7 @@
                         <div class="team-member">
                             <img class="mx-auto rounded-circle" src=".\css/img/unnamed.jpg" alt="..." />
                             <h4>Simone Mondello</h4>
-                            <p class="text-muted">Lead Designer</p>
+                            
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
@@ -240,9 +243,9 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src=".\css/img/unnamed.jpg" alt="..." />
+                            <img class="mx-auto rounded-circle" src=".\css/img/Erika.jpg" alt="..." />
                             <h4>Erika Ancora</h4>
-                            <p class="text-muted">Lead Marketer</p>
+                            
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Twitter Profile"><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Facebook Profile"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
@@ -252,7 +255,7 @@
                         <div class="team-member">
                             <img class="mx-auto rounded-circle" src=".\css/img/unnamed.jpg" alt="..." />
                             <h4>Alberto Vecchiatti</h4>
-                            <p class="text-muted">Lead Developer</p>
+                           
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Facebook Profile"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
@@ -284,69 +287,7 @@
             </div>
         </div>
         <!-- Contact-->
-        <section class="page-section" id="contact">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Contattaci</h2>
-                    <h3 class="section-subheading text-muted">Contatta il nostro centro assistenza</h3>
-                </div>
-                <!-- * * * * * * * * * * * * * * *-->
-                <!-- * * SB Forms Contact Form * *-->
-                <!-- * * * * * * * * * * * * * * *-->
-                <!-- This form is pre-integrated with SB Forms.-->
-                <!-- To make this form functional, sign up at-->
-                <!-- https://startbootstrap.com/solution/contact-forms-->
-                <!-- to get an API token!-->
-                <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                    <div class="row align-items-stretch mb-5">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <!-- Name input-->
-                                <input class="form-control" id="name" type="text" placeholder="Nome *" data-sb-validations="required" />
-                                <div class="invalid-feedback" data-sb-feedback="name:required">Nome richiesto.</div>
-                            </div>
-                            <div class="form-group">
-                                <!-- Email address input-->
-                                <input class="form-control" id="email" type="email" placeholder="Email *" data-sb-validations="required,email" />
-                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                <div class="invalid-feedback" data-sb-feedback="email:email">Email non valida.</div>
-                            </div>
-                            <div class="form-group mb-md-0">
-                                <!-- Phone number input-->
-                                <input class="form-control" id="phone" type="tel" placeholder="Numero di telefono *" data-sb-validations="required" />
-                                <div class="invalid-feedback" data-sb-feedback="phone:required">Numero di telefono richiesto.</div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group form-group-textarea mb-md-0">
-                                <!-- Message input-->
-                                <textarea class="form-control" id="message" placeholder="Messaggio *" data-sb-validations="required"></textarea>
-                                <div class="invalid-feedback" data-sb-feedback="message:required">Messaggio richiesto.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Submit success message-->
-                    <!---->
-                    <!-- This is what your users will see when the form-->
-                    <!-- has successfully submitted-->
-                    <div class="d-none" id="submitSuccessMessage">
-                        <div class="text-center text-white mb-3">
-                            <div class="fw-bolder">Form submission successful!</div>
-                            To activate this form, sign up at
-                            <br />
-                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                        </div>
-                    </div>
-                    <!-- Submit error message-->
-                    <!---->
-                    <!-- This is what your users will see when there is-->
-                    <!-- an error submitting the form-->
-                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                    <!-- Submit Button-->
-                    <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Invia!</button></div>
-                </form>
-            </div>
-        </section>
+        
         <!-- Footer-->
         <footer class="footer py-4">
             <div class="container">

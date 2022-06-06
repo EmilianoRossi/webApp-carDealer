@@ -112,7 +112,7 @@ namespace webApp_carDealer.Controllers
                 carToCreate.Price = data.car.Price;
                 carToCreate.Kilometers = data.car.Kilometers;
                 carToCreate.ModelCar = data.car.ModelCar;
-                carToCreate.Like = data.car.Like;
+                carToCreate.Like = 0;
                 carToCreate.Quantity = data.car.Quantity;
                 carToCreate.CategoryId = data.car.CategoryId;
 
