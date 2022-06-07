@@ -355,7 +355,7 @@
                                             </tr>
                                            
                                 `
-                                console.log(cars);
+                              
                         });
                         
                         
@@ -406,8 +406,8 @@
                                                 <a href="https://localhost:7202/User/DetailsUser/${cars.id}">
                                                 <button type="button" class="btn btn-primary">Dettagli</button>
                                                 </a>
-                                                <button onclick="like(${cars.id})" type="button" class="btn btn-danger">Mi piace</button>
-                                                    <input type="text" class="text-center" id="likeText" value="${cars.like} &hearts;" style="border:none;">
+                                                <button onclick="like(${cars.id})" type="button" id="buttonLike${cars.id}" class="btn btn-danger">Mi piace</button>
+                                                    <input type="text" class="text-center" id="likeText${cars.id}" value="${cars.like}" style="border:none;"><p>&hearts;</p>
                                             </div>
                                     </div>
                                  </div>
@@ -415,11 +415,11 @@
                             
 
                                 `
-                            console.log(cars.id);       
+                                  
                         });
                         
                     
-                    console.log(result.data);
+                  
                     
                 }
 
@@ -436,12 +436,17 @@
                     
                     
                 }).then(result =>{
-
-                    console.log("ciao");
+                    let value = document.getElementById('likeText' +carId).value;
+                    value++;
+                    var button = document.querySelector('.buttonLike' +carId);
+                    document.getElementById('likeText' +carId).value = value;
+                    button.setAttribute = ('disabled' , '');
+                    button.value = "MI PIACE";
+                    console.log(button);
                 }).catch(error => {
                         console.log("C'è stato un errore: " + error);
                     })
-                console.log(carId);
+                
                 
                 
             }
