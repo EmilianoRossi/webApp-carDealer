@@ -1,7 +1,7 @@
 ﻿@model Car
 @{
 
-    Layout = "_mioLayout";
+    Layout = "_Layout";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -440,6 +440,7 @@
                     value++;
                     
                     document.getElementById('likeText' +carId).value = value;
+                    document.getElementById('buttonLike' + carId).setAttribute('disabled', '');
                     
                     
                     console.log(button);
