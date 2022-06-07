@@ -126,12 +126,12 @@ namespace webApp_carDealer.Controllers.API
 
 
                 model.LikeNumber=0;
-
+                carFound.Like++;
                 context.SaveChanges();
 
 
 
-                return Ok();
+                return Ok(carFound.Like);
             }
         }
     }
