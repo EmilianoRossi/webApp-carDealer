@@ -224,7 +224,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src=".\css/img/giuseppe.jfif" alt="..." />
+                            <img class="mx-auto rounded-circle" src=".\css/img/Giuseppe.jpg" alt="..." />
                             <h4>Giuseppe Russo</h4>
                             
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
@@ -399,7 +399,7 @@
                                             <div class="portfolio-hover">
                                         <div class="portfolio-hover-content"><p>${cars.price}€</></i></div>
                                         </div>
-                                            <img class="img-fluid" src="${cars.image}" height="250" alt="..." />
+                                            <img class="img-fluid" src="${cars.image}" alt="..." />
                                             </a>
                                             <div class="portfolio-caption">
                                                 <div class="portfolio-caption-heading">${cars.brandCar} ${cars.modelCar}</div>
@@ -407,7 +407,8 @@
                                                 <button type="button" class="btn btn-primary">Dettagli</button>
                                                 </a>
                                                 <button onclick="like(${cars.id})" type="button" id="buttonLike${cars.id}" class="btn btn-danger">Mi piace</button>
-                                                    <input type="text" class="text-center" id="likeText${cars.id}" value="${cars.like}" style="border:none;"><p>&hearts;</p>
+                                                    <input type="text" class="text-center" id="likeText${cars.id}" value="${cars.like}" style="border:none;">
+                                                    <span>&hearts;</span>
                                             </div>
                                     </div>
                                  </div>
