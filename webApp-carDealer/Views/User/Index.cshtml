@@ -254,7 +254,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src=".\css/img/unnamed.jpg" alt="..." />
+                            <img class="mx-auto rounded-circle" src=".\css/img/alberto.jpg" alt="..." />
                             <h4>Alberto Vecchiatti</h4>
                            
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i class="fab fa-twitter"></i></a>
@@ -403,12 +403,14 @@
                                             </a>
                                             <div class="portfolio-caption">
                                                 <div class="portfolio-caption-heading">${cars.brandCar} ${cars.modelCar}</div>
+                                                
                                                 <a href="https://localhost:7202/User/DetailsUser/${cars.id}">
                                                 <button type="button" class="btn btn-primary">Dettagli</button>
                                                 </a>
                                                 <button onclick="like(${cars.id})" type="button" id="buttonLike${cars.id}" class="btn btn-danger">Mi piace</button>
-                                                    <input type="text" class="text-center" id="likeText${cars.id}" value="${cars.like}" style="border:none;">
-                                                    <span>&hearts;</span>
+                                                <br>
+                                                    <span class="text-center" id="likeText${cars.id}">${cars.like}</span><span>&hearts;</span>
+                                                    
                                             </div>
                                     </div>
                                  </div>
@@ -437,10 +439,11 @@
                     
                     
                 }).then(result =>{
-                    let value = document.getElementById('likeText' +carId).value;
+                    let value = document.getElementById('likeText' +carId).innerHTML;
                     value++;
+                    console.log(value);
                     
-                    document.getElementById('likeText' +carId).value = value;
+                    document.getElementById('likeText' +carId).innerHTML = value;
                     document.getElementById('buttonLike' + carId).setAttribute('disabled', '');
                     
                     
